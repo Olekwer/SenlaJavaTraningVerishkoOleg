@@ -72,7 +72,7 @@ public abstract class IFlight {
 		
 		System.out.println(flight.getSTATUS());
 
-		return new FlightLate();
+		return flight;
 	}
 
 }
