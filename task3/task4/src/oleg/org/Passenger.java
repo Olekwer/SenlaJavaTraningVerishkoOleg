@@ -1,9 +1,10 @@
-
+package oleg.org;
 public final class Passenger {
+	private int id;
 	private String firstName;
 	private String lastName;
 
-	public Passenger(String firstName, String lastName) {
+	public Passenger(String firstName, String lastName) {		
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -22,6 +23,14 @@ public final class Passenger {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
