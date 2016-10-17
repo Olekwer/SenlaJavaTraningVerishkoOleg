@@ -3,13 +3,11 @@ package com.example.oleg.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.danco.training.TextFileWorker;
-import com.example.oleg.model.Guest;
+
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
 
 public class RoomList implements Lists {
-	private final String PATH="E:/1/goest.txt";
 	private List<Room> rooms;
 
 	public void creat() {
