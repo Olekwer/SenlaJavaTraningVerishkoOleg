@@ -35,15 +35,16 @@ public class Main {
 					System.out.println(facade.getServiceRoomList().getFreeRooms().get(i));
 		}
 		System.out.println(facade.getServiceRoomList().getFreeRooms().size());
-		/*String strd="10.10.2016";
-		String stro="15.10.2016";
-		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-		Date d1=format.parse(strd);
-		Date d2=format.parse(stro);
-		long dd1=d1.getTime();
-		long dd2=d2.getTime();
-		int res=(int) ((dd2-dd1)/(24*60*60*1000));
-		System.out.println(res);*/
+		System.out.println("----------------------------------------");
+		facade.getGuestRoom().paymentAmount(1);
+		System.out.println("----------------------------------------");
+		facade.getServiceRoomList().threeLastGuest(12);
+		for(int i=0;i<facade.getServiceRoomList().threeLastGuest(12).length;i++){
+			System.out.println(facade.getServiceRoomList().threeLastGuest(12)[i]);
+		}
+		System.out.println("----------------------------------------");
+		facade.getServiceRoomList().changeRoomPrice(7, 999.99);
+		System.out.println(facade.getServiceRoomList().roomDetail(7));
 		
 		
 	}
