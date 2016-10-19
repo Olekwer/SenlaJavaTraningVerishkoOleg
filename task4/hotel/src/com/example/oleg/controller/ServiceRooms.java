@@ -53,7 +53,7 @@ public class ServiceRooms {
 		Guest[] guestArr=new Guest[THREE];
 		guestArr[0]=guests.get(guests.size()-1);
 		guestArr[1]=guests.get(guests.size()-2);
-		guestArr[2]=guests.get(guests.size()-2);
+		//guestArr[2]=guests.get(guests.size()-3);
 		
 		return guestArr;
 	}

@@ -8,6 +8,7 @@ public class Room {
 	private double price;
 	private int capacity;
 	private int stars;
+	private StatusRoom statusRoom;
 	private List<Guest> guest;
 	public Room(int number, double price,int capacity,int stars){
 		this.number=number;
@@ -15,6 +16,7 @@ public class Room {
 		this.capacity=capacity;
 		this.stars=stars;
 		this.guest= new ArrayList<Guest>();
+		this.setStatusRoom(StatusRoom.repairs);
 	}
 	public double getPrice() {
 		return price;
@@ -49,6 +51,12 @@ public class Room {
 	public String toString(){
 		String s=this.number+" "+this.price+" "+this.capacity+" "+this.stars;
 		return s;
+	}
+	public StatusRoom getStatusRoom() {
+		return statusRoom;
+	}
+	public void setStatusRoom(StatusRoom statusRoom) {
+		this.statusRoom = statusRoom;
 	}
 
 }

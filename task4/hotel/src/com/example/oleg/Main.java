@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		System.out.println(args[0]);
-
+		
 		DateBase dateBase = new DateBase(args[0], args[1], args[2]);
 		Facade facade = new Facade(dateBase);
 		for (int i = 0; i < facade.getServiceGuests().getGuestsList().size(); i++) {
@@ -49,7 +49,7 @@ public class Main {
 		System.out.println("-----------------------------------------------------");
 		SimpleDateFormat format=new SimpleDateFormat("dd.MM.yyyy");
 
-		facade.getServiceGuests().putGuestRoom("kira",1, format.parse("19.10.2016"), format.parse("30.10.2016"));
+		//facade.getServiceGuests().putGuestRoom("kira",1, format.parse("19.10.2016"), format.parse("30.10.2016"));
 		facade.getServiceGuests().saveGuest(args[1]);
 		dateBase = new DateBase(args[0], args[1], args[2]);
 		facade=new Facade(dateBase);
@@ -62,7 +62,7 @@ public class Main {
 		}
 		System.out.println("-----------------------------------------------------");
 		for(int i=0;i<facade.getServiceRooms().threeLostGuest(4).length;i++){
-			System.out.println(facade.getServiceRooms().threeLostGuest(4)[i]);
+			System.out.println(facade.getServiceRooms().threeLostGuest(2)[i]);
 		}
 		
 	}
