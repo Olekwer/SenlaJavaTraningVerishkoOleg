@@ -15,6 +15,10 @@ public class Option {
 		this.price = price;
 	}
 
+	public Option() {
+
+	}
+
 	public int getId() {
 		return id;
 	}

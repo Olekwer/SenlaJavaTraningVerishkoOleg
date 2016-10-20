@@ -8,15 +8,13 @@ public class CompareRoomCapacity implements Comparator<Room> {
 
 	@Override
 	public int compare(Room arg0, Room arg1) {
-		int capacity1=arg0.getCapacity();
-		int capacity2=arg1.getCapacity();
-		if(capacity1>capacity2){
+		int capacity1 = arg0.getCapacity();
+		int capacity2 = arg1.getCapacity();
+		if (capacity1 > capacity2) {
 			return 1;
-		}
-		else if(capacity1<capacity2){
-			return -1; 
-		}
-		else{
+		} else if (capacity1 < capacity2) {
+			return -1;
+		} else {
 			return 0;
 		}
 	}
