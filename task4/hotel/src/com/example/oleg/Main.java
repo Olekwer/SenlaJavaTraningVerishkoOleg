@@ -17,7 +17,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println(args[0]);
 		
-		DateBase dateBase = new DateBase(args[0], args[1], args[2]);
+		DateBase dateBase = new DateBase(args[0], args[1], args[2], args[3]);
 		Facade facade = new Facade(dateBase);
 		for (int i = 0; i < facade.getServiceGuests().getGuestsList().size(); i++) {
 			System.out.println(facade.getServiceGuests().getGuestsList().get(i));
@@ -51,7 +51,7 @@ public class Main {
 
 		facade.getServiceGuests().putGuestRoom("kira",1, format.parse("19.10.2016"), format.parse("30.10.2016"));
 		facade.getServiceGuests().saveGuest(args[1]);
-		dateBase = new DateBase(args[0], args[1], args[2]);
+		dateBase = new DateBase(args[0], args[1], args[2],args[3]);
 		facade=new Facade(dateBase);
 		for (int i = 0; i < facade.getServiceGuests().getGuestsList().size(); i++) {
 			System.out.println(facade.getServiceGuests().getGuestsList().get(i));
@@ -68,6 +68,11 @@ public class Main {
 		System.out.println(facade.getServiceRooms().detailRoom(4));
 		System.out.println("-----------------------------------------------------");		
 		System.out.println(facade.getServiceRooms().paymentGuest(4));
+		System.out.println("-----------------------------------------------------");		
+		for (int i = 0; i < facade.getServiceOrder().optionGuest(1).size(); i++) {
+			System.out.println(facade.getServiceOrder().optionGuest(1).get(i));
+		}
+		
 	}
 
 	

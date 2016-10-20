@@ -8,19 +8,22 @@ import com.danco.training.TextFileWorker;
 import com.example.oleg.base.parser.TextParser;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
+import com.example.oleg.model.Order;
 import com.example.oleg.model.Room;
 
 public class DateBase {
 	private List<Room> roomsList;
 	private List<Guest> guestsList;
 	private List<Option> optionsList;
+	private List<Order> orderList;
 
-	public DateBase(String path1, String path2, String path3)
+	public DateBase(String path1, String path2, String path3,String path4)
 			throws ParseException {
 
 		this.roomsList = creteRoom(path1);
 		this.guestsList = creteGuest(path2);
 		this.optionsList = creteOption(path3);
+		this.orderList=createOrder(path4);
 		guestAddRoom();
 	}
 
@@ -77,11 +80,27 @@ public class DateBase {
 		return list;
 	}
 
+	private List<Order> createOrder(String path) throws ParseException{
+		TextFileWorker textFileWorker = new TextFileWorker(path);
+		String[] orders = textFileWorker.readFromFile();
+		TextParser textParser=new TextParser();
+		List<Order> list = textParser.createOrderList(orders);
+		
+		return list;
+	}
 	private void guestAddRoom() {
 		for (int i = 0; i < this.guestsList.size(); i++) {
 			Guest guest = this.guestsList.get(i);
 			this.roomsList.get(guest.getNumberRoom()).getGuest().add(guest);
 		}
+	}
+
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
 	}	
 
 	

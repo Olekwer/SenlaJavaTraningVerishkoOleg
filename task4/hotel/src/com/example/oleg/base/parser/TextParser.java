@@ -7,10 +7,11 @@ import java.util.Date;
 import java.util.List;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
+import com.example.oleg.model.Order;
 import com.example.oleg.model.Room;
 
 public class TextParser {
-
+	private final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 	public TextParser() {
 
 	}
@@ -37,10 +38,9 @@ public class TextParser {
 			String[] guestStr = str[i].split(";");
 			int id = Integer.parseInt(guestStr[0]);
 			String name = guestStr[1];
-			int numberRoom = Integer.parseInt(guestStr[2]);
-			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-			Date dateChange = format.parse(guestStr[3]);
-			Date dateOut = format.parse(guestStr[4]);
+			int numberRoom = Integer.parseInt(guestStr[2]);		
+			Date dateChange = FORMAT.parse(guestStr[3]);
+			Date dateOut = FORMAT.parse(guestStr[4]);
 			Guest guest = new Guest(id, name, numberRoom, dateChange, dateOut);
 			list.add(guest);
 		}
@@ -59,6 +59,24 @@ public class TextParser {
 			Option option = new Option(id, name, price);
 			list.add(option);
 		}
+		return list;
+	}
+	
+	public List<Order>createOrderList(String[] str) throws ParseException{
+		ArrayList<Order> list = new ArrayList<Order>();
+
+		for (int i = 0; i < str.length; i++) {
+			String[] orderStr = str[i].split(";");
+			int idOption = Integer.parseInt(orderStr[0]);
+			int idGuest= Integer.parseInt(orderStr[1]);
+			Date date=FORMAT.parse(orderStr[2]);
+			Order order=new Order();
+			order.setIdGuest(idGuest);
+			order.setIdOption(idOption);
+			order.setDateOption(date);
+			list.add(order);
+		}
+		
 		return list;
 	}
 

@@ -6,11 +6,12 @@ public class Facade {
 	private ServiceGuests serviceGuests;
 	private ServiceRooms serviceRooms;
 	private ServiceOptions serviceOptions;
-
+	private ServiceOrder serviceOrder;
 	public Facade(DateBase dateBase) {
 		this.serviceGuests = new ServiceGuests(dateBase.getGuestsList());
 		this.serviceRooms = new ServiceRooms(dateBase.getRoomsList());
 		this.serviceOptions = new ServiceOptions(dateBase.getOptionsList());
+		this.setServiceOrder(new ServiceOrder(dateBase));
 	}
 
 	public ServiceGuests getServiceGuests() {
@@ -35,5 +36,13 @@ public class Facade {
 
 	public void setServiceOptions(ServiceOptions serviceOptions) {
 		this.serviceOptions = serviceOptions;
+	}
+
+	public ServiceOrder getServiceOrder() {
+		return serviceOrder;
+	}
+
+	public void setServiceOrder(ServiceOrder serviceOrder) {
+		this.serviceOrder = serviceOrder;
 	}
 }
