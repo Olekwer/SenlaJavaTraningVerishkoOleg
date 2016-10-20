@@ -1,74 +1,59 @@
 package com.example.oleg.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import com.danco.training.TextFileWorker;
+import com.example.oleg.base.DateBase;
 import com.example.oleg.compare.guest.CompareGuestName;
 import com.example.oleg.model.Guest;
 
 public class ServiceGuests {
-	private final String SPLIT = ";";
-	private final String PATTERN = "dd.MM.yyyy";
-	private List<Guest> guestsList;
 
-	public ServiceGuests(List<Guest> guests) {
-		this.setGuestsList(guests);
+	private DateBase dateBase;
+
+	public ServiceGuests(DateBase dateBase) {
+		this.dateBase = dateBase;
 	}
 
 	public List<Guest> getGuestsList() {
-		return guestsList;
+		return dateBase.getGuestsList();
 	}
 
 	public void setGuestsList(List<Guest> guestsList) {
-		this.guestsList = guestsList;
+		this.dateBase.setGuestsList(guestsList);
 	}
 
 	public List<Guest> sortedByName() {
-		ArrayList<Guest> sortList = new ArrayList<Guest>(this.guestsList);
+		ArrayList<Guest> sortList = new ArrayList<Guest>(this.dateBase.getGuestsList());
 		Collections.sort(sortList, new CompareGuestName());
 		return sortList;
 	}
 
 	public List<Guest> sortedByDateOut() {
-		ArrayList<Guest> sortList = new ArrayList<Guest>(this.guestsList);
+		ArrayList<Guest> sortList = new ArrayList<Guest>(this.dateBase.getGuestsList());
 		Collections.sort(sortList, new CompareGuestName());
 		return sortList;
 	}
 
 	public void putGuestRoom(String name, int numberRoom, Date dateChange, Date dateOut) {
-		int id = this.guestsList.size() + 1;
+		int id = this.dateBase.getGuestsList().size() + 1;
 		Guest guest = new Guest(id, name, numberRoom, dateChange, dateOut);
-		this.guestsList.add(guest);
+		this.dateBase.getGuestsList().add(guest);
 	}
-	
-	public void guestOut(int idGuest){
-		this.guestsList.remove(idGuest);
+
+	public void guestOut(int idGuest) {
+		this.dateBase.getGuestsList().remove(idGuest);
 	}
 
 	public void saveGuest(String filePath) {
-		TextFileWorker textFileWorker = new TextFileWorker(filePath);
-		String[] mass = new String[this.guestsList.size()];
-		for (int i = 0; i < this.guestsList.size(); i++) {
-			Guest guest = this.guestsList.get(i);
-			int id = guest.getId();
-			String name = guest.getName();
-			int numberRoom = guest.getNumberRoom();
-			SimpleDateFormat format = new SimpleDateFormat(PATTERN);
-			String dChange = format.format(guest.getDateChange());
-			String dOut = format.format(guest.getDateOut());
-			StringBuffer stringBuffer = new StringBuffer();
-			stringBuffer.append(id + SPLIT).append(name + SPLIT).append(numberRoom + SPLIT).append(dChange + SPLIT)
-					.append(dOut + SPLIT).append("[ ]");
-			mass[i] = stringBuffer.toString();
-		}
-		textFileWorker.writeToFile(mass);
+		SaveFile saveFile = new SaveFile(filePath);
+		saveFile.saveGuest(this.dateBase.getGuestsList());
+
 	}
 
-	public int amountGuest(){
-		return this.guestsList.size();
+	public int amountGuest() {
+		return this.dateBase.getGuestsList().size();
 	}
 }

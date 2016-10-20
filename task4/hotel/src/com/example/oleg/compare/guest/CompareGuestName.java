@@ -7,9 +7,9 @@ import com.example.oleg.model.Guest;
 public class CompareGuestName implements Comparator<Guest> {
 	@Override
 	public int compare(Guest o1, Guest o2) {
-		String str1=o1.getName();
-		String str2=o2.getName();
+		String str1 = o1.getName();
+		String str2 = o2.getName();
 		return str1.compareTo(str2);
-		
+
 	}
 }

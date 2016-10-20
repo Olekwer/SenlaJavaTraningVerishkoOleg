@@ -7,10 +7,11 @@ public class Facade {
 	private ServiceRooms serviceRooms;
 	private ServiceOptions serviceOptions;
 	private ServiceOrder serviceOrder;
+
 	public Facade(DateBase dateBase) {
-		this.serviceGuests = new ServiceGuests(dateBase.getGuestsList());
-		this.serviceRooms = new ServiceRooms(dateBase.getRoomsList());
-		this.serviceOptions = new ServiceOptions(dateBase.getOptionsList());
+		this.serviceGuests = new ServiceGuests(dateBase);
+		this.serviceRooms = new ServiceRooms(dateBase);
+		this.serviceOptions = new ServiceOptions(dateBase);
 		this.setServiceOrder(new ServiceOrder(dateBase));
 	}
 

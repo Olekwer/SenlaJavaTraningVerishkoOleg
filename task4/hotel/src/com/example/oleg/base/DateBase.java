@@ -3,9 +3,7 @@ package com.example.oleg.base;
 import java.text.ParseException;
 import java.util.List;
 
-
-import com.danco.training.TextFileWorker;
-import com.example.oleg.base.parser.TextParser;
+import com.example.oleg.base.createList.CreateList;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
 import com.example.oleg.model.Order;
@@ -17,13 +15,12 @@ public class DateBase {
 	private List<Option> optionsList;
 	private List<Order> orderList;
 
-	public DateBase(String path1, String path2, String path3,String path4)
-			throws ParseException {
+	public DateBase(String path1, String path2, String path3, String path4) throws ParseException {
 
-		this.roomsList = creteRoom(path1);
-		this.guestsList = creteGuest(path2);
-		this.optionsList = creteOption(path3);
-		this.orderList=createOrder(path4);
+		this.roomsList = new CreateList().creteRoom(path1);
+		this.guestsList = new CreateList().createGuest(path2);
+		this.optionsList = new CreateList().createOption(path3);
+		this.orderList = new CreateList().createOrder(path4);
 		guestAddRoom();
 	}
 
@@ -50,44 +47,8 @@ public class DateBase {
 	public void setOptionsList(List<Option> optionsList) {
 		this.optionsList = optionsList;
 	}
-
-	private List<Room> creteRoom(String path) {
-		TextFileWorker textFileWorker = new TextFileWorker(path);
-		String[] rooms = textFileWorker.readFromFile();		
-		
-		TextParser textParser=new TextParser();
-		List<Room>roomList =	textParser.createRoomList(rooms);		
-		
-		return roomList;
-	}
-
 	// 2,3
-	private List<Guest> creteGuest(String path) throws ParseException {
-		TextFileWorker textFileWorker = new TextFileWorker(path);
-		String[] guests = textFileWorker.readFromFile();
-		List<Guest> list;
-		TextParser textParser=new TextParser();
-		list=textParser.createGuestList(guests);
-		return list;
-	}
 
-	private List<Option> creteOption(String path) throws ParseException {
-		TextFileWorker textFileWorker = new TextFileWorker(path);
-		String[] options = textFileWorker.readFromFile();
-		TextParser textParser=new TextParser();
-		List<Option> list = textParser.createOptionList(options);
-		
-		return list;
-	}
-
-	private List<Order> createOrder(String path) throws ParseException{
-		TextFileWorker textFileWorker = new TextFileWorker(path);
-		String[] orders = textFileWorker.readFromFile();
-		TextParser textParser=new TextParser();
-		List<Order> list = textParser.createOrderList(orders);
-		
-		return list;
-	}
 	private void guestAddRoom() {
 		for (int i = 0; i < this.guestsList.size(); i++) {
 			Guest guest = this.guestsList.get(i);
@@ -101,7 +62,6 @@ public class DateBase {
 
 	public void setOrderList(List<Order> orderList) {
 		this.orderList = orderList;
-	}	
+	}
 
-	
 }

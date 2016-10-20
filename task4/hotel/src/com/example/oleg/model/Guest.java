@@ -11,13 +11,15 @@ public class Guest {
 	private Date dateOut;
 	private List<Option> optionsList;
 
-	public Guest(int id, String name, int numberRoom, Date dateChange,
-			Date dateOut) {
+	public Guest(int id, String name, int numberRoom, Date dateChange, Date dateOut) {
 		this.id = id;
 		this.name = name;
 		this.setNumberRoom(numberRoom);
 		this.dateChange = dateChange;
 		this.dateOut = dateOut;
+	}
+
+	public Guest() {
 	}
 
 	public String getName() {
@@ -70,8 +72,7 @@ public class Guest {
 
 	public String toString() {
 
-		String s = this.name + " " + this.numberRoom + " " + this.dateChange
-				+ " " + this.dateOut;
+		String s = this.name + " " + this.numberRoom + " " + this.dateChange + " " + this.dateOut;
 
 		return s;
 
