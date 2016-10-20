@@ -41,6 +41,10 @@ public class ServiceOptions {
 		Option option=new Option(id, name, price);
 		this.optionsList.add(option);
 	}
+	public void setPrice(int idOption, double price){
+		Option option=this.optionsList.get(idOption-1);
+		option.setPrice(price);
+	}
 	
 	public void saveOption(String path){
 		TextFileWorker textFileWorker=new TextFileWorker(path);
@@ -57,4 +61,5 @@ public class ServiceOptions {
 		textFileWorker.writeToFile(mass);
 	}
 
+	
 }

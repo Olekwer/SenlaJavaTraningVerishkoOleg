@@ -21,7 +21,7 @@ public class DateBase {
 		this.roomsList = creteRoom(path1);
 		this.guestsList = creteGuest(path2);
 		this.optionsList = creteOption(path3);
-		zasunutGuestVnomera();
+		guestAddRoom();
 	}
 
 	public List<Room> getRoomsList() {
@@ -77,11 +77,12 @@ public class DateBase {
 		return list;
 	}
 
-	private void zasunutGuestVnomera() {
+	private void guestAddRoom() {
 		for (int i = 0; i < this.guestsList.size(); i++) {
 			Guest guest = this.guestsList.get(i);
 			this.roomsList.get(guest.getNumberRoom()).getGuest().add(guest);
 		}
 	}	
 
+	
 }
