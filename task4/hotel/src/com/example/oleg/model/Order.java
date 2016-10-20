@@ -1,23 +1,28 @@
 package com.example.oleg.model;
 
+import java.util.Date;
+
 public class Order {
-	private Guest guest;
-	private Option option;
-
-	public Guest getGuest() {
-		return guest;
+	private int idGuest;
+	private int idOption;
+	private Date dateOption;
+	public int getIdGuest() {
+		return idGuest;
 	}
-
-	public void setGuest(Guest guest) {
-		this.guest = guest;
+	public void setIdGuest(int idGuest) {
+		this.idGuest = idGuest;
 	}
-
-	public Option getOption() {
-		return option;
+	public int getIdOption() {
+		return idOption;
 	}
-
-	public void setOption(Option option) {
-		this.option = option;
+	public void setIdOption(int idOption) {
+		this.idOption = idOption;
+	}
+	public Date getDateOption() {
+		return dateOption;
+	}
+	public void setDateOption(Date dateOption) {
+		this.dateOption = dateOption;
 	}
 
 }
