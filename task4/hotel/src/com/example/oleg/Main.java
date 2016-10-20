@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		System.out.println(args[0]);
-
+		
 		DateBase dateBase = new DateBase(args[0], args[1], args[2]);
 		Facade facade = new Facade(dateBase);
 		for (int i = 0; i < facade.getServiceGuests().getGuestsList().size(); i++) {
@@ -62,9 +62,12 @@ public class Main {
 		}
 		System.out.println("-----------------------------------------------------");
 		for(int i=0;i<facade.getServiceRooms().threeLostGuest(4).length;i++){
-			System.out.println(facade.getServiceRooms().threeLostGuest(4)[i]);
+			System.out.println(facade.getServiceRooms().threeLostGuest(2)[i]);
 		}
-		
+		System.out.println("-----------------------------------------------------");		
+		System.out.println(facade.getServiceRooms().detailRoom(4));
+		System.out.println("-----------------------------------------------------");		
+		System.out.println(facade.getServiceRooms().paymentGuest(4));
 	}
 
 	
