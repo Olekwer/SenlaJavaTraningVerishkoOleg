@@ -1,49 +1,49 @@
 package com.example.oleg.controller;
 
-import com.example.oleg.base.DateBase;
+import com.example.oleg.base.DataBase;
 
 public class Facade {
-	private ServiceGuests serviceGuests;
-	private ServiceRooms serviceRooms;
-	private ServiceOptions serviceOptions;
-	private ServiceOrder serviceOrder;
+	private GuestsService serviceGuests;
+	private RoomsService serviceRooms;
+	private OptionsService serviceOptions;
+	private OrderService serviceOrder;
 
-	public Facade(DateBase dateBase) {
-		this.serviceGuests = new ServiceGuests(dateBase);
-		this.serviceRooms = new ServiceRooms(dateBase);
-		this.serviceOptions = new ServiceOptions(dateBase);
-		this.setServiceOrder(new ServiceOrder(dateBase));
+	public Facade(DataBase dataBase) {
+		this.serviceGuests = new GuestsService(dataBase);
+		this.serviceRooms = new RoomsService(dataBase);
+		this.serviceOptions = new OptionsService(dataBase);
+		this.setServiceOrder(new OrderService(dataBase));
 	}
 
-	public ServiceGuests getServiceGuests() {
+	public GuestsService getServiceGuests() {
 		return serviceGuests;
 	}
 
-	public void setServiceGuests(ServiceGuests serviceGuests) {
+	public void setServiceGuests(GuestsService serviceGuests) {
 		this.serviceGuests = serviceGuests;
 	}
 
-	public ServiceRooms getServiceRooms() {
+	public RoomsService getServiceRooms() {
 		return serviceRooms;
 	}
 
-	public void setServiceRooms(ServiceRooms serviceRooms) {
+	public void setServiceRooms(RoomsService serviceRooms) {
 		this.serviceRooms = serviceRooms;
 	}
 
-	public ServiceOptions getServiceOptions() {
+	public OptionsService getServiceOptions() {
 		return serviceOptions;
 	}
 
-	public void setServiceOptions(ServiceOptions serviceOptions) {
+	public void setServiceOptions(OptionsService serviceOptions) {
 		this.serviceOptions = serviceOptions;
 	}
 
-	public ServiceOrder getServiceOrder() {
+	public OrderService getServiceOrder() {
 		return serviceOrder;
 	}
 
-	public void setServiceOrder(ServiceOrder serviceOrder) {
+	public void setServiceOrder(OrderService serviceOrder) {
 		this.serviceOrder = serviceOrder;
 	}
 }

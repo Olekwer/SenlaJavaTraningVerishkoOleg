@@ -4,7 +4,7 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import com.example.oleg.base.DateBase;
+import com.example.oleg.base.DataBase;
 import com.example.oleg.controller.Facade;
 
 public class Main {
@@ -17,7 +17,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println(args[0]);
 		
-		DateBase dateBase = new DateBase(args[0], args[1], args[2], args[3]);
+		DataBase dateBase = new DataBase(args[0], args[1], args[2], args[3]);
 		Facade facade = new Facade(dateBase);
 		for (int i = 0; i < facade.getServiceGuests().getGuestsList().size(); i++) {
 			System.out.println(facade.getServiceGuests().getGuestsList().get(i));
@@ -51,7 +51,7 @@ public class Main {
 
 		facade.getServiceGuests().putGuestRoom("kira",1, format.parse("19.10.2016"), format.parse("30.10.2016"));
 		facade.getServiceGuests().saveGuest(args[1]);
-		dateBase = new DateBase(args[0], args[1], args[2],args[3]);
+		dateBase = new DataBase(args[0], args[1], args[2],args[3]);
 		facade=new Facade(dateBase);
 		for (int i = 0; i < facade.getServiceGuests().getGuestsList().size(); i++) {
 			System.out.println(facade.getServiceGuests().getGuestsList().get(i));
