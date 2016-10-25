@@ -15,7 +15,8 @@ public class Menu implements IComponent {
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		System.out.println("I "+this.getClass()+" run "+this.event.getClass().getName());
+		//System.out.println("I "+this.getClass()+" run "+this.event.getClass().getName());
+		this.event.action();
 		
 	}
 }

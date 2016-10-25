@@ -6,8 +6,22 @@ import com.example.oleg.component.IComponent;
 import com.example.oleg.event.IEvent;
 
 public class ComponentManager implements IManager {
+	private static ComponentManager componentManager;
+	
 	private List<IComponent>components=new ArrayList<IComponent>();
 
+	
+	private ComponentManager() {
+
+	}
+	
+	public static ComponentManager getComponentManager(){
+		if(componentManager==null){
+			componentManager=new ComponentManager();
+		} 
+		return componentManager;
+	}
+	
 	@Override
 	public void addComponent(IComponent component) {
 		components.add(component);		
