@@ -1,4 +1,4 @@
-package com.example.oleg.base.parser;
+/*package com.example.oleg.base.parser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -89,3 +89,4 @@ public class TextParser {
 	}
 
 }
+*/

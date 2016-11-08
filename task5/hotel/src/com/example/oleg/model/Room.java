@@ -1,22 +1,28 @@
 package com.example.oleg.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room {
+public class Room implements Serializable, Cloneable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int id;
 	private int number;
 	private double price;
 	private int capacity;
 	private int stars;
-	private StatusRoom statusRoom;
-	private List<Guest> guest;
+	private transient StatusRoom statusRoom;
+	private transient List<Guest> guest =new ArrayList<Guest>();
 
 	public Room(int number, double price, int capacity, int stars) {
 		this.number = number;
 		this.price = price;
 		this.capacity = capacity;
 		this.stars = stars;
-		this.guest = new ArrayList<Guest>();
+		//this.guest = new ArrayList<Guest>();
 		this.setStatusRoom(StatusRoom.REPAIRS);
 	}
 
@@ -61,7 +67,7 @@ public class Room {
 	}
 
 	public String toString() {
-		String s = this.number + " " + this.price + " " + this.capacity + " " + this.stars;
+		String s = this.id+" "+this.number + " " + this.price + " " + this.capacity + " " + this.stars;
 		return s;
 	}
 
@@ -71,6 +77,26 @@ public class Room {
 
 	public void setStatusRoom(StatusRoom statusRoom) {
 		this.statusRoom = statusRoom;
+	}
+	
+	@Override
+	public Room clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return (Room) super.clone();
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

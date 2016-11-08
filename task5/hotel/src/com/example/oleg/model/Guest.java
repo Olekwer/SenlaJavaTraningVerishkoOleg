@@ -1,15 +1,20 @@
 package com.example.oleg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Guest {
+public class Guest implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private int numberRoom;
 	private Date dateChange;
 	private Date dateOut;
-	private List<Option> optionsList;
+	private transient List<Option> optionsList;
 
 	public Guest(int id, String name, int numberRoom, Date dateChange, Date dateOut) {
 		this.id = id;

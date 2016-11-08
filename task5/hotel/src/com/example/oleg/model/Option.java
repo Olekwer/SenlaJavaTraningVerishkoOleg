@@ -1,8 +1,13 @@
 package com.example.oleg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Option {
+public class Option implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private double price;
