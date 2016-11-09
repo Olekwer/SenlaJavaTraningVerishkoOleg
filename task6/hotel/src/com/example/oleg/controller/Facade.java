@@ -21,6 +21,10 @@ public class Facade {
 	private OrderService serviceOrder;
 
 	private Facade() {
+<<<<<<< HEAD
+=======
+		
+>>>>>>> task6new
 	}
 
 	public static Facade getFacade() {

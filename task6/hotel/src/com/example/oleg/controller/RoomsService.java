@@ -1,13 +1,21 @@
 package com.example.oleg.controller;
 
 import java.io.FileNotFoundException;
+<<<<<<< HEAD
+=======
+import java.io.FileOutputStream;
+>>>>>>> task6new
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import org.apache.log4j.Logger;
+>>>>>>> task6new
 
 import com.example.oleg.base.DataBase;
 import com.example.oleg.compare.guest.CompareGuestDateOut;
@@ -17,21 +25,36 @@ import com.example.oleg.compare.room.CompareRoomStars;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
+<<<<<<< HEAD
 
 public class RoomsService {
 	private final int THREE = 3;
 	private final String PRICE = " price ";
 	private DataBase dateBase;
 	private static Logger log;
+=======
+import com.example.oleg.prop.PropHolder;
+
+public class RoomsService {
+	private static final String NONONO = "нельзя";
+	private final int THREE = 3;
+	private final String PRICE = " price ";
+	private DataBase dateBase;
+	private Logger log = Logger.getLogger(RoomsService.class.getName());
+>>>>>>> task6new
 
 	public RoomsService(DataBase dateBase) {
 		this.dateBase = dateBase;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> task6new
 
 	public void setRoomsList(List<Room> roomsList) {
 		this.dateBase.setRoomsList(roomsList);
 	}
+<<<<<<< HEAD
 	
 	public List<Room> getRoomsList() {
 		return this.dateBase.getRoomsList();
@@ -55,6 +78,56 @@ public class RoomsService {
 				}
 			}
 		}
+=======
+
+	public List<Room> getRoomsList() {
+		return this.dateBase.getRoomsList();
+	}
+
+	public List<Room> allFreeRoom(Date date) {
+		List<Room> list = new ArrayList<Room>();
+		List<Room> rlist = new ArrayList<Room>(dateBase.getRoomsList());
+
+		for (int i = 0; i < dateBase.getGuestsList().size(); i++) {
+			Guest guest = dateBase.getGuestsList().get(i);
+			int number = guest.getNumberRoom();
+			for (int j = 0; j < rlist.size(); j++) {
+				if (rlist.get(j).getNumber() == number) {
+					long d = date.getTime();
+					long d1 = guest.getDateChange().getTime();
+					long d2 = guest.getDateOut().getTime();
+					if (!((d > d1) && (d < d2))) {
+						list.add(rlist.get(j));
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < rlist.size(); i++) {
+			Room r = dateBase.getRoomsList().get(i);
+			for (int k = 0; k < dateBase.getGuestsList().size(); k++) {
+				Guest guest = dateBase.getGuestsList().get(i);
+				int number = guest.getNumberRoom();
+
+				if (r.getNumber() == number) {
+					r.getGuest().add(guest);
+				}
+
+			}
+		}
+
+		/*
+		 * for (int i = 0; i < this.getRoomsList().size(); i++) { if
+		 * (this.getRoomsList().get(i).getGuest().size() == 0) {
+		 * list.add(this.getRoomsList().get(i)); continue; }
+		 * 
+		 * for (int j = 0; j < this.getRoomsList().get(i).getGuest().size();
+		 * j++) { Guest guest = this.getRoomsList().get(i).getGuest().get(j);
+		 * long d = date.getTime(); long d1 = guest.getDateChange().getTime();
+		 * long d2 = guest.getDateOut().getTime(); if (!((d > d1) && (d < d2)))
+		 * { list.add(this.getRoomsList().get(i)); } } }
+		 */
+>>>>>>> task6new
 		return list;
 	}
 
@@ -63,6 +136,7 @@ public class RoomsService {
 		List<Guest> guests = new ArrayList<Guest>(this.getRoomsList().get(numderRoom + 1).getGuest());
 		Collections.sort(guests, new CompareGuestDateOut());
 		Guest[] guestArr = new Guest[THREE];
+<<<<<<< HEAD
 		try{
 			guestArr[0] = guests.get(guests.size() - 1);
 			guestArr[1] = guests.get(guests.size() - 2);
@@ -73,17 +147,36 @@ public class RoomsService {
 
 		}
 		
+=======
+		try {
+			guestArr[0] = guests.get(guests.size() - 1);
+			guestArr[1] = guests.get(guests.size() - 2);
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info(e);
+
+		}
+
+>>>>>>> task6new
 		// guestArr[2]=guests.get(guests.size()-3);
 
 		return guestArr;
 	}
 
 	public Room detailRoom(int numberRoom) {
+<<<<<<< HEAD
 		
 		Room room = null;
 		for (int i = 0; i < this.dateBase.getRoomsList().size(); i++) {
 			if(this.dateBase.getRoomsList().get(i).getNumber()==numberRoom){
 				room= this.dateBase.getRoomsList().get(i);
+=======
+
+		Room room = null;
+		for (int i = 0; i < this.dateBase.getRoomsList().size(); i++) {
+			if (this.dateBase.getRoomsList().get(i).getNumber() == numberRoom) {
+				room = this.dateBase.getRoomsList().get(i);
+>>>>>>> task6new
 				break;
 			}
 		}
@@ -91,6 +184,7 @@ public class RoomsService {
 	}
 
 	public void repairsRoom(int numberRoom) {
+<<<<<<< HEAD
 		try{
 			Room room = this.getRoomsList().get(numberRoom - 1);
 			room.setStatusRoom(StatusRoom.REPAIRS);
@@ -114,6 +208,40 @@ public class RoomsService {
 
 		}
 		
+=======
+		PropHolder propHolder = PropHolder.holder();
+		if (propHolder.satusOn()) {
+
+			try {
+				Room room = this.getRoomsList().get(numberRoom - 1);
+				room.setStatusRoom(StatusRoom.REPAIRS);
+			} catch (Exception e) {
+				// TODO: handle exception
+				log.info(e);
+
+			}
+		} else {
+			log.info(NONONO);
+		}
+
+	}
+
+	public void maintainedRoom(int numberRoom) {
+		PropHolder propHolder = PropHolder.holder();
+		if (propHolder.satusOn()) {
+			try {
+				Room room = this.getRoomsList().get(numberRoom - 1);
+				room.setStatusRoom(StatusRoom.MAINTAINED);
+			} catch (Exception e) {
+				// TODO: handle exception
+				log.info(e);
+
+			}
+		} else {
+			log.info(NONONO);
+		}
+
+>>>>>>> task6new
 	}
 
 	public String priceNumber(int numberRoom) {
@@ -150,6 +278,7 @@ public class RoomsService {
 		double res = days * price;
 		return res;
 	}
+<<<<<<< HEAD
 	
 	public List<Guest> historyGuest(Room room, int amountGuest){
 		List<Guest> list=new ArrayList<Guest>();
@@ -173,6 +302,33 @@ public class RoomsService {
 			}
 		}
 		
+=======
+
+	public List<Guest> historyGuest(Room room, int amountGuest) {
+		PropHolder propHolder = PropHolder.holder();
+		amountGuest=propHolder.amountHistory();
+		List<Guest> list = new ArrayList<Guest>();
+		int number = room.getNumber();
+		for (int i = 0; i < this.dateBase.getGuestsList().size(); i++) {
+			if (this.dateBase.getGuestsList().get(i).getNumberRoom() == number) {
+				list.add(this.dateBase.getGuestsList().get(i));
+			}
+		}
+
+		Collections.sort(list, new CompareGuestDateOut());
+		List<Guest> results = new ArrayList<Guest>();
+		if (list.size() < amountGuest) {
+			amountGuest = list.size();
+		}
+		// if(list.size())
+		for (int i = list.size() - 1; i > -1; i--) {
+			results.add(list.get(i));
+			if (results.size() == amountGuest) {
+				break;
+			}
+		}
+
+>>>>>>> task6new
 		return results;
 	}
 
@@ -203,11 +359,16 @@ public class RoomsService {
 		Collections.sort(list, new CompareRoomCapacity());
 		return list;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> task6new
 	public void saverRoom(String path) throws FileNotFoundException, IOException {
 		FileSaver saveFile = new FileSaver(path);
 		saveFile.sever(this.dateBase.getRoomsList());
 	}
+<<<<<<< HEAD
 	
 	//клонирование объекта. Объекту присваиваем уникальный id
 	public Room roomClone(int numberRoom){
@@ -216,10 +377,21 @@ public class RoomsService {
 		for (int i = 0; i < this.dateBase.getRoomsList().size(); i++) {
 			if(this.dateBase.getRoomsList().get(i).getNumber()==numberRoom){
 				room= this.dateBase.getRoomsList().get(i);
+=======
+
+	// клонирование объекта. Объекту присваиваем уникальный id
+	public Room roomClone(int numberRoom) {
+		Room room = null;
+		Room clone = null;
+		for (int i = 0; i < this.dateBase.getRoomsList().size(); i++) {
+			if (this.dateBase.getRoomsList().get(i).getNumber() == numberRoom) {
+				room = this.dateBase.getRoomsList().get(i);
+>>>>>>> task6new
 				break;
 			}
 		}
 		try {
+<<<<<<< HEAD
 			clone =room.clone();
 			int max=this.dateBase.getRoomsList().get(0).getId();
 			for(int i=0;i<this.dateBase.getRoomsList().size();i++){
@@ -239,4 +411,43 @@ public class RoomsService {
 	public void updatePriceRoom(Room room, double price){
 		room.setPrice(price);
 	}
+=======
+			clone = room.clone();
+			int max = this.dateBase.getRoomsList().get(0).getId();
+			for (int i = 0; i < this.dateBase.getRoomsList().size(); i++) {
+				if (this.dateBase.getRoomsList().get(i).getId() > max) {
+					max = this.dateBase.getRoomsList().get(i).getId();
+				}
+			}
+			clone.setId(max + 1);
+			this.dateBase.getRoomsList().add(clone);
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+
+		return clone;
+	}
+
+	public void updatePriceRoom(Room room, double price) {
+		room.setPrice(price);
+	}
+	
+	public void importCSV(String path){
+		ArrayList<Room> roomsList=new ArrayList<Room>(dateBase.getRoomsList());
+		try {
+			FileOutputStream outputStream=new FileOutputStream(path);
+			for (int i = 0; i < roomsList.size(); i++) {
+				Room room=roomsList.get(i);
+				
+			}
+			
+			
+			
+			
+		} catch (FileNotFoundException e) {
+			log.info(e);
+		}
+		
+	}
+>>>>>>> task6new
 }

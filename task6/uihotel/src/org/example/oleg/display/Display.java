@@ -3,7 +3,13 @@ package org.example.oleg.display;
 import org.example.oleg.navigator.Navigator;
 
 
+<<<<<<< HEAD
 
+=======
+/*
+ * вывод на экран меню
+ */
+>>>>>>> task6new
 public class Display {
 	private Navigator navigator;
 

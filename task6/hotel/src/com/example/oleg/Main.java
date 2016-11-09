@@ -1,5 +1,6 @@
 package com.example.oleg;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +12,19 @@ import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+=======
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+>>>>>>> task6new
 import com.example.oleg.base.DataBase;
 import com.example.oleg.controller.Facade;
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
+<<<<<<< HEAD
+=======
+import com.example.oleg.prop.PropHolder;
+>>>>>>> task6new
 
 public class Main {
 
@@ -25,7 +35,10 @@ public class Main {
 	 * @throws FileNotFoundException 
 	 */
 	public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
+<<<<<<< HEAD
 			
+=======
+>>>>>>> task6new
 		System.out.println(args[0]);
 		String n= "MAINTAINED";
 		System.out.println(n.equals(StatusRoom.MAINTAINED.name()));

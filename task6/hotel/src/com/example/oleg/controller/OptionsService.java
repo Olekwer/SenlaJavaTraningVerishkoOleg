@@ -5,8 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import org.apache.log4j.Logger;
+
+>>>>>>> task6new
 
 import com.example.oleg.base.DataBase;
 import com.example.oleg.compare.option.CompareOptionsName;
@@ -14,7 +19,11 @@ import com.example.oleg.model.Option;
 
 public class OptionsService {
 	private DataBase dateBase;
+<<<<<<< HEAD
 	private static Logger log;
+=======
+	private static Logger log= Logger.getLogger(OptionsService.class.getName());
+>>>>>>> task6new
 
 	public OptionsService(DataBase dateBase) {
 		this.dateBase = dateBase;
@@ -48,7 +57,11 @@ public class OptionsService {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+<<<<<<< HEAD
 			log.log(Level.SEVERE, "Exception: ", e);
+=======
+			log.info(e);
+>>>>>>> task6new
 
 		}
 		
@@ -61,7 +74,11 @@ public class OptionsService {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+<<<<<<< HEAD
 			log.log(Level.SEVERE, "Exception: ", e);
+=======
+			log.info(e);
+>>>>>>> task6new
 
 		}
 		

@@ -4,11 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.oleg.event.IEvent;
+<<<<<<< HEAD
 
 public class MenuFactory {
 	private String title;
 	private MenuFactory rootMenu;
 	private MenuFactory[] subMenus;
+=======
+/*
+ * меню
+ */
+public class MenuFactory {
+	private static final String Q_QUIT = "; q - выход";
+	private static final String NULL_BREAK = "0 - break";
+	private static final String SPLIT = "; ";
+	private static final String HYPHEN = " - ";
+	private static final int ONE = 1;
+	private String title;
+	private MenuFactory rootMenu;
+	//private MenuFactory[] subMenus;
+>>>>>>> task6new
 	private List<MenuFactory> subMenyList=new ArrayList<MenuFactory>();
 	private IEvent event;
 	private String help;
@@ -43,6 +58,14 @@ public class MenuFactory {
 		this.title = title;
 		this.event = event;
 	}
+<<<<<<< HEAD
+=======
+	
+	public MenuFactory(String title, MenuFactory rootMenu) {
+		this.title = title;
+		this.rootMenu = rootMenu;
+	}
+>>>>>>> task6new
 
 	/**
 	 * @param event
@@ -78,6 +101,7 @@ public class MenuFactory {
 	/**
 	 * @return the subMenus
 	 */
+<<<<<<< HEAD
 	public MenuFactory[] getSubMenus() {
 		return subMenus;
 	}
@@ -92,6 +116,8 @@ public class MenuFactory {
 		this.setHelp();
 
 	}
+=======
+>>>>>>> task6new
 
 	/**
 	 * @return the event
@@ -124,17 +150,30 @@ public class MenuFactory {
 		if (this.subMenyList.size() > 0) {
 
 			for (int i = 0; i < this.subMenyList.size(); i++) {
+<<<<<<< HEAD
 				builder.append(i + 1).append(" - ").append(this.subMenyList.get(i).getTitle()).append("; ");
 			}
 			if(this.rootMenu!=null){
 				builder.append("0 - break");
+=======
+				builder.append(i + ONE).append(HYPHEN).append(this.subMenyList.get(i).getTitle()).append(SPLIT);
+			}
+			if(this.rootMenu!=null){
+				builder.append(NULL_BREAK);
+>>>>>>> task6new
 			}
 			
 			
 		}
 		else {
+<<<<<<< HEAD
 			builder.append("0 - break");
 		}
+=======
+			builder.append(NULL_BREAK);
+		}
+		builder.append(Q_QUIT);
+>>>>>>> task6new
 		this.help = builder.toString();
 
 	}

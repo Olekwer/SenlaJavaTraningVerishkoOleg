@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import org.apache.log4j.Logger;
+>>>>>>> task6new
 
 import com.example.oleg.base.DataBase;
 import com.example.oleg.compare.guest.CompareGuestName;
@@ -16,7 +20,11 @@ import com.example.oleg.model.Guest;
 public class GuestsService {
 
 	private DataBase dateBase;
+<<<<<<< HEAD
 	private static Logger log;
+=======
+	private Logger log= Logger.getLogger(GuestsService.class.getName());
+>>>>>>> task6new
 	public GuestsService(DataBase dateBase) {
 		this.dateBase = dateBase;
 	}
@@ -49,7 +57,11 @@ public class GuestsService {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+<<<<<<< HEAD
 			log.log(Level.SEVERE, "Exception: ", e);
+=======
+			log.info(e);
+>>>>>>> task6new
 		}
 		
 	}
@@ -60,7 +72,11 @@ public class GuestsService {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+<<<<<<< HEAD
 			log.log(Level.SEVERE, "Exception: ", e);
+=======
+			log.info(e);
+>>>>>>> task6new
 
 		}
 		

@@ -1,14 +1,18 @@
 package org.example.oleg.builder;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> task6new
 import org.example.oleg.event.AddGuest;
 import org.example.oleg.event.AllFreeRoom;
 import org.example.oleg.event.AllGuest;
 import org.example.oleg.event.AllOption;
 import org.example.oleg.event.AllRooms;
 import org.example.oleg.event.AmountGuest;
+<<<<<<< HEAD
 import org.example.oleg.event.CloneRoom;
 import org.example.oleg.event.DetailRoom;
 import org.example.oleg.event.LastThreeGuest;
@@ -23,6 +27,28 @@ import org.example.oleg.event.StatusRoom;
 import org.example.oleg.menu.MenuFactory;
 
 
+=======
+import org.example.oleg.event.CapacityRoomSorter;
+import org.example.oleg.event.CloneRoom;
+import org.example.oleg.event.DateOutGuest;
+import org.example.oleg.event.DetailRoom;
+import org.example.oleg.event.LastThreeGuest;
+import org.example.oleg.event.NameGuestSorter;
+import org.example.oleg.event.NameOptionSorter;
+import org.example.oleg.event.OptionAdd;
+import org.example.oleg.event.OrderGuest;
+import org.example.oleg.event.PaymentGuest;
+import org.example.oleg.event.PriceOptionSorter;
+import org.example.oleg.event.RoomSorterPrice;
+import org.example.oleg.event.SetPriceOption;
+import org.example.oleg.event.StarsRoomSorter;
+import org.example.oleg.event.StatusRoom;
+import org.example.oleg.menu.MenuFactory;
+
+/*
+ * создание меню
+ */
+>>>>>>> task6new
 public class Builder {
 	
 	private MenuFactory startMenu1;
@@ -35,7 +61,10 @@ public class Builder {
 	private MenuFactory roomCloneMenu;
 	private MenuFactory guestMenu1;
 	private MenuFactory guestAddMenu1;
+<<<<<<< HEAD
 	@SuppressWarnings("unused")
+=======
+>>>>>>> task6new
 	private MenuFactory guestAmountMenu1;
 	private MenuFactory guestOrderMenu1;
 	private MenuFactory guestPaymentMenu1;
@@ -45,6 +74,20 @@ public class Builder {
 	private MenuFactory optionSetPrice1;
 	private MenuFactory optionSortedMenu1;
 	
+<<<<<<< HEAD
+=======
+	private MenuFactory starsRoomSorter;
+	private MenuFactory capacityRoomSorter;
+	private MenuFactory priceRoomSorter;
+	
+	private MenuFactory nameGuestSorter;
+	private MenuFactory dateGuestSorter;
+	
+	private MenuFactory priceOptionSorter;
+	private MenuFactory nameOptionSorter;
+
+	
+>>>>>>> task6new
 	public Builder() {
 		this.createMenu();
 	}
@@ -70,7 +113,11 @@ public class Builder {
 		this.roomMenu1.getSubMenyList().add(this.roomLastThreeGuestMenu1);
 
 
+<<<<<<< HEAD
 		this.roomSortedMenu1=new MenuFactory("Room Sorted",this.roomMenu1, new SortedRoom());
+=======
+		this.roomSortedMenu1=new MenuFactory("Room Sorted",this.roomMenu1);
+>>>>>>> task6new
 		this.roomMenu1.getSubMenyList().add(this.roomSortedMenu1);
 		
 
@@ -83,11 +130,19 @@ public class Builder {
 		
 
 		this.guestAddMenu1=new MenuFactory("Add guest", this.guestMenu1, new AddGuest());
+<<<<<<< HEAD
 		startMenu1.getSubMenyList().add(this.guestAddMenu1);
 		
 
 		this.guestAmountMenu1 = new MenuFactory("guest Amount", this.guestMenu1, new AmountGuest());
 		startMenu1.getSubMenyList().add(this.guestAddMenu1);
+=======
+		guestMenu1.getSubMenyList().add(this.guestAddMenu1);
+		
+
+		this.guestAmountMenu1 = new MenuFactory("guest Amount", this.guestMenu1, new AmountGuest());
+		guestMenu1.getSubMenyList().add(this.guestAmountMenu1);
+>>>>>>> task6new
 		
 
 		this.guestOrderMenu1= new MenuFactory("guest Order", this.guestMenu1, new OrderGuest());
@@ -97,7 +152,11 @@ public class Builder {
 		this.guestPaymentMenu1= new MenuFactory("guest Payment",this.guestMenu1, new PaymentGuest());
 		this.guestMenu1.getSubMenyList().add(this.guestPaymentMenu1);
 
+<<<<<<< HEAD
 		this.guestSortedMenu1=new MenuFactory("guest Sorted",this.guestMenu1, new SortedGuest());
+=======
+		this.guestSortedMenu1=new MenuFactory("guest Sorted",this.guestMenu1);
+>>>>>>> task6new
 		this.guestMenu1.getSubMenyList().add(this.guestSortedMenu1);
 		
 		
@@ -110,16 +169,52 @@ public class Builder {
 		this.optionSetPrice1= new MenuFactory("optionSetPrice", this.optionMenu1, new SetPriceOption());
 		this.optionMenu1.getSubMenyList().add(this.optionSetPrice1);
 	
+<<<<<<< HEAD
 		this.optionSortedMenu1=new MenuFactory("option Sorted", this.optionMenu1, new OptionSorter());
+=======
+		this.optionSortedMenu1=new MenuFactory("option Sorted", this.optionMenu1);
+>>>>>>> task6new
 		this.optionMenu1.getSubMenyList().add(this.optionSortedMenu1);
 		
 		this.roomCloneMenu=new MenuFactory("Clone Room",this.roomMenu1,new CloneRoom());
 		this.roomMenu1.getSubMenyList().add(this.roomCloneMenu);
 		
+<<<<<<< HEAD
+=======
+		this.starsRoomSorter=new MenuFactory("stars Room Sorter",this.roomSortedMenu1, new StarsRoomSorter());
+		this.roomSortedMenu1.getSubMenyList().add(this.starsRoomSorter);
+		
+		this.capacityRoomSorter=new MenuFactory("capacity Room Sorter",this.roomSortedMenu1, new CapacityRoomSorter());
+		this.roomSortedMenu1.getSubMenyList().add(this.capacityRoomSorter);
+		
+		this.priceRoomSorter=new MenuFactory("price Room Sorter",this.roomSortedMenu1, new RoomSorterPrice());
+		this.roomSortedMenu1.getSubMenyList().add(this.priceRoomSorter);
+		
+		this.nameGuestSorter=new MenuFactory("name Guest Sorter",this.guestSortedMenu1, new NameGuestSorter());
+		this.guestSortedMenu1.getSubMenyList().add(this.nameGuestSorter);
+		
+		this.dateGuestSorter=new MenuFactory("date Guest Sorter",this.guestSortedMenu1, new DateOutGuest());
+		this.guestSortedMenu1.getSubMenyList().add(this.dateGuestSorter);
+		
+		this.nameOptionSorter=new MenuFactory("name Option Sorter",this.optionSortedMenu1, new NameOptionSorter());
+		this.optionSortedMenu1.getSubMenyList().add(this.nameOptionSorter);
+		
+		this.priceOptionSorter=new MenuFactory("name Option Sorter",this.optionSortedMenu1, new PriceOptionSorter());
+		this.optionSortedMenu1.getSubMenyList().add(this.priceOptionSorter);
+		
+		
+>>>>>>> task6new
 		this.startMenu1.setHelp();
 		this.guestMenu1.setHelp();
 		this.roomMenu1.setHelp();
 		this.optionMenu1.setHelp();
+<<<<<<< HEAD
+=======
+		this.roomSortedMenu1.setHelp();
+		this.guestSortedMenu1.setHelp();
+		this.optionSortedMenu1.setHelp();
+		
+>>>>>>> task6new
 		
 				
 		
