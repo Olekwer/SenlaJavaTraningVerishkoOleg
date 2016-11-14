@@ -285,12 +285,12 @@ public class RoomsService {
 		room.setPrice(price);
 	}
 	
-	public void importCSV(String path){
+	public void exportCSV(String path){
 		AboutCSV aboutCSV=new AboutCSV(path);
 		aboutCSV.outputRoom(this.dateBase.getRoomsList());
 		
 	}
-	public void exportCsv(String path){
+	public void importCsv(String path) throws IOException{
 		AboutCSV aboutCSV=new AboutCSV(path);
 		List<Room> listRoom=aboutCSV.importRoom();
 		for(int i=0;i<listRoom.size();i++){

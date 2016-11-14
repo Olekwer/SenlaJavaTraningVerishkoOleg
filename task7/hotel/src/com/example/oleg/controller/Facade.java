@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.example.oleg.base.DataBase;
 
 import com.example.oleg.model.Guest;
@@ -19,6 +21,7 @@ public class Facade implements IFacade{
 	private RoomsService serviceRooms;
 	private OptionsService serviceOptions;
 	private OrderService serviceOrder;
+	private static Logger log = Logger.getLogger(RoomsService.class.getName());
 
 	private Facade() {
 		
@@ -252,9 +255,13 @@ public class Facade implements IFacade{
 		return this.serviceRooms.roomClone(numberRoom);
 	}
 	public void importCsvRoom(String path){
-		this.serviceRooms.importCSV(path);
+		try {
+			this.serviceRooms.importCsv(path);
+		} catch (IOException e) {
+			log.info(e);
+		}
 	}
 	public void exportCsvRoom(String path){
-		this.serviceRooms.exportCsv(path);
+		this.serviceRooms.exportCSV(path);
 	}
 }
