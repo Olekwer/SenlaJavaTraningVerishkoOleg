@@ -14,8 +14,8 @@ public class Room implements Serializable, Cloneable {
 	private double price;
 	private int capacity;
 	private int stars;
-	private transient StatusRoom statusRoom;
-	private transient List<Guest> guest =new ArrayList<Guest>();
+	private StatusRoom statusRoom;
+	private List<Guest> guest =new ArrayList<Guest>();
 
 	public Room(int number, double price, int capacity, int stars) {
 		this.number = number;

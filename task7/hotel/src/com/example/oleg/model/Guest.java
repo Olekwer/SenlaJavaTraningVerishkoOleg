@@ -14,7 +14,7 @@ public class Guest implements Serializable {
 	private int numberRoom;
 	private Date dateChange;
 	private Date dateOut;
-	private transient List<Option> optionsList;
+	private List<Option> optionsList;
 
 	public Guest(int id, String name, int numberRoom, Date dateChange, Date dateOut) {
 		this.id = id;
