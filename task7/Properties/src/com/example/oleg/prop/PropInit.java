@@ -25,6 +25,10 @@ public class PropInit {
 		}
     }
 	
+    public String geProperties(String key){
+    	return getMapConfig().get(key);
+    }
+    
 	public Properties geProperties(){
 		return properties;
 	}
