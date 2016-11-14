@@ -31,7 +31,7 @@ public class RoomsService {
 
 	public RoomsService(DataBase dateBase) {
 		this.dateBase = dateBase;
-		this.propHolder=new PropHolder(CONFIG_CONFIG_PROPERTIES);
+		this.propHolder = new PropHolder(CONFIG_CONFIG_PROPERTIES);
 		this.propHolder.getPropInit();
 	}
 
@@ -91,7 +91,8 @@ public class RoomsService {
 
 	public Guest[] threeLostGuest(int numderRoom) {
 
-		List<Guest> guests = new ArrayList<Guest>(this.getRoomsList().get(numderRoom + 1).getGuest());
+		List<Guest> guests = new ArrayList<Guest>(this.getRoomsList()
+				.get(numderRoom + 1).getGuest());
 		Collections.sort(guests, new CompareGuestDateOut());
 		Guest[] guestArr = new Guest[THREE];
 		try {
@@ -121,8 +122,8 @@ public class RoomsService {
 	}
 
 	public void repairsRoom(int numberRoom) {
-		String str=propHolder.getPropInit().getMapConfig().get("statusOn");
-		Boolean boolean1=Boolean.parseBoolean(str);
+		String str = propHolder.getPropInit().geProperties("statusOn");
+		Boolean boolean1 = Boolean.parseBoolean(str);
 		if (boolean1) {
 
 			try {
@@ -140,8 +141,8 @@ public class RoomsService {
 	}
 
 	public void maintainedRoom(int numberRoom) {
-		String str=propHolder.getPropInit().getMapConfig().get("statusOn");
-		Boolean boolean1=Boolean.parseBoolean(str);
+		String str = propHolder.getPropInit().geProperties("statusOn");
+		Boolean boolean1 = Boolean.parseBoolean(str);
 		if (boolean1) {
 			try {
 				Room room = this.getRoomsList().get(numberRoom - 1);
@@ -157,12 +158,13 @@ public class RoomsService {
 
 	}
 
-
 	public String priceNumber(int numberRoom) {
 
 		double p = this.getRoomsList().get(numberRoom - 1).getPrice();
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append(this.getRoomsList().get(numberRoom + 1).getNumber()).append(PRICE).append(p);
+		stringBuffer
+				.append(this.getRoomsList().get(numberRoom + 1).getNumber())
+				.append(PRICE).append(p);
 		return stringBuffer.toString();
 	}
 
@@ -194,7 +196,8 @@ public class RoomsService {
 	}
 
 	public List<Guest> historyGuest(Room room, int amountGuest) {
-		amountGuest=Integer.parseInt(propHolder.getPropInit().getMapConfig().get("amountHistory"));
+		amountGuest = Integer.parseInt(propHolder.getPropInit().geProperties(
+				"amountHistory"));
 		List<Guest> list = new ArrayList<Guest>();
 		int number = room.getNumber();
 		for (int i = 0; i < this.dateBase.getGuestsList().size(); i++) {
@@ -247,7 +250,8 @@ public class RoomsService {
 		return list;
 	}
 
-	public void saverRoom(String path) throws FileNotFoundException, IOException {
+	public void saverRoom(String path) throws FileNotFoundException,
+			IOException {
 		FileSaver saveFile = new FileSaver(path);
 		saveFile.sever(this.dateBase.getRoomsList());
 	}
@@ -284,35 +288,33 @@ public class RoomsService {
 	public void updatePriceRoom(Room room, double price) {
 		room.setPrice(price);
 	}
-	
-	public void exportCSV(String path){
-		AboutCSV aboutCSV=new AboutCSV(path);
+
+	public void exportCSV(String path) {
+		AboutCSV aboutCSV = new AboutCSV(path);
 		aboutCSV.outputRoom(this.dateBase.getRoomsList());
-		
+
 	}
-	public void importCsv(String path) throws IOException{
-		AboutCSV aboutCSV=new AboutCSV(path);
-		List<Room> listRoom=aboutCSV.importRoom();
-		for(int i=0;i<listRoom.size();i++){
-			Room room=listRoom.get(i);
-			int k=0;
-			for(int j=0;j<this.dateBase.getRoomsList().size();j++){
-				Room countRoom=this.dateBase.getRoomsList().get(j);
-				if(room.getId()==countRoom.getId()){
+
+	public void importCsv(String path) throws IOException {
+		AboutCSV aboutCSV = new AboutCSV(path);
+		List<Room> listRoom = aboutCSV.importRoom();
+		for (Room room: listRoom) {
+			int k = 0;			
+			for (Room countRoom : this.dateBase.getRoomsList()) {
+				if (room.getId() == countRoom.getId()) {
 					countRoom.setNumber(room.getNumber());
 					countRoom.setPrice(room.getPrice());
 					countRoom.setStars(room.getStars());
 					countRoom.setCapacity(room.getCapacity());
-					
-					k=1;
+
+					k = 1;
 					break;
 				}
 			}
-			if(k==0){
+			if (k == 0) {
 				this.dateBase.getRoomsList().add(room);
 			}
-						
-			
+
 		}
 	}
 }
