@@ -37,10 +37,15 @@ public class AboutCSV {
 		BufferedWriter bufferedWriter = null;
 		try {
 			bufferedWriter = new BufferedWriter(new FileWriter(new File(path)));
-			for (int i = 0; i < roomList.size(); i++) {
+			/*for (int i = 0; i < roomList.size(); i++) {
 				String str = parser.roomParsing(roomList.get(i));
 				bufferedWriter.write(str + '\n');
+			}*/
+			for(Room room : roomList){
+				String str = parser.roomParsing(room);
+				bufferedWriter.write(str + '\n');
 			}
+			
 		} catch (IOException e) {
 			log.info(e);
 		} finally {
@@ -54,12 +59,13 @@ public class AboutCSV {
 		}
 	}
 
-	public List<Room> importRoom() {
+	public List<Room> importRoom() throws IOException{
 		List<Room> roomList = new ArrayList<Room>();
 		Parser parser = new Parser();
 		BufferedReader bufferedReader=null;
 		
 		try {
+		//	BufferedReader bufferedReader=null;
 			bufferedReader=new BufferedReader(new FileReader(new File(path)));
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -67,14 +73,12 @@ public class AboutCSV {
 				Room room = parser.stringToRoom(line);
 				roomList.add(room);
 			}
+			bufferedReader.close();
 		} catch (IOException e) {
 			log.info(e);
 		} finally {
-			try {
-				bufferedReader.close();
-			} catch (IOException e) {
-				log.info(e);
-			}
+			bufferedReader.close();
+			
 		}
 
 		return roomList;
