@@ -14,13 +14,13 @@ import com.example.oleg.compare.guest.CompareGuestDateOut;
 import com.example.oleg.compare.room.CompareRoomCapacity;
 import com.example.oleg.compare.room.CompareRoomPrice;
 import com.example.oleg.compare.room.CompareRoomStars;
+import com.example.oleg.controller.iservice.IRoomSrvice;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
-import com.example.oleg.prop.PropHolder;
 import com.example.oleg.prop.PropInit;
 
-public class RoomsService {
+public class RoomsService implements IRoomSrvice{
 	private static final String CONFIG_CONFIG_PROPERTIES = "config/config.properties";
 	private static final String NONONO = "nonono";
 	private final int THREE = 3;
@@ -29,7 +29,9 @@ public class RoomsService {
 	private Logger log = Logger.getLogger(RoomsService.class.getName());
 
 	private PropInit propInit;
-
+	public RoomsService(){
+		
+	}
 	public RoomsService(DataBase dateBase) {
 		this.dateBase = dateBase;
 		this.propInit = new PropInit();

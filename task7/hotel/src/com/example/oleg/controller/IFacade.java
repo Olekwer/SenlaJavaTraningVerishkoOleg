@@ -14,9 +14,6 @@ import com.example.oleg.model.Option;
 import com.example.oleg.model.Room;
 
 public interface IFacade {
-	 static Facade getFacade() {
-		return null;
-	}
 	 void init(DataBase dataBase);
 	 List<Guest> sortedByNameGuest();
 	 List<Guest> getGuestsList();

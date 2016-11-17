@@ -3,11 +3,18 @@ package com.example.oleg;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
+
+import javax.tools.Diagnostic;
+
 import com.example.oleg.base.DataBase;
 import com.example.oleg.controller.Facade;
+import com.example.oleg.controller.IFacade;
+import com.example.oleg.controller.RoomsService;
+import com.example.oleg.controller.iservice.IRoomSrvice;
+import com.example.oleg.di.DI;
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
-import com.example.oleg.prop.PropHolder;
 
 public class Main {
 
@@ -16,19 +23,31 @@ public class Main {
 	 * @throws ParseException
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
+	public static void main(String[] args) throws ParseException, FileNotFoundException, IOException, InstantiationException, IllegalAccessException {
+		
+		IRoomSrvice r=new RoomsService();
+		
+		DI di=new DI();
+		IRoomSrvice nr ;
+		System.out.println();
+		IRoomSrvice n = (IRoomSrvice) di.inject(IRoomSrvice.class);
+		System.out.println(n.getClass().getName());
+		
+		//di.injection(n);
+		
 		//System.out.println(args[0]);
-		String n= "MAINTAINED";
-		System.out.println(n.equals(StatusRoom.MAINTAINED.name()));
+	
 		DataBase dateBase = new DataBase("room.txt", "guest.txt", "option.txt", "order.txt");
-		Facade facade = Facade.getFacade();
+		IFacade facade = Facade.getFacade();
 		facade.init(dateBase);
-	/*	facade.saverOption("option.txt");
+		facade.saverOption("option.txt");
 		facade.saverGuest("guest.txt");
 		facade.saverRoom("room.txt");
 		facade.saverOrder("order.txt");
-		*/
+		
 		for (int i = 0; i < facade.getServiceOptions().getOptionsList().size(); i++) {
 			System.out.println(facade.getServiceOptions().getOptionsList().get(i));
 		}
@@ -62,8 +81,8 @@ public class Main {
 			System.out.println(facade.getServiceRooms().getRoomsList().get(i));
 		}
 		System.out.println("-----------------------------------------------------");
-		
-/*		SimpleDateFormat format=new SimpleDateFormat("dd.MM.yyyy");
+	/*	
+		SimpleDateFormat format=new SimpleDateFormat("dd.MM.yyyy");
 
 		facade.getServiceGuests().putGuestRoom("kira",1, format.parse("19.10.2016"), format.parse("30.10.2016"));
 		facade.getServiceGuests().saverGuest("guest.txt");;
@@ -121,8 +140,8 @@ public class Main {
 		System.out.println(facade.getServiceRooms().detailRoom(4));
 		System.out.println("-----------------------------------------------------");		
 		System.out.println(facade.getServiceRooms().paymentGuest(4));
-		*/
 		
+		*/
 	}
 
 	
