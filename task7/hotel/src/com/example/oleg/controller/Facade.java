@@ -8,30 +8,43 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.example.oleg.base.DataBase;
+import com.example.oleg.di.DI;
+import com.example.oleg.di.inject;
 
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
 import com.example.oleg.model.Room;
 
 public class Facade implements IFacade{
-
-	private static Facade facade;
-
+	
+	@inject
+	private static IFacade facade;
+	@inject
 	private GuestsService serviceGuests;
+	@inject
 	private RoomsService serviceRooms;
+	@inject
 	private OptionsService serviceOptions;
+	@inject
 	private OrderService serviceOrder;
 	private static Logger log = Logger.getLogger(RoomsService.class.getName());
 
-	private Facade() {
+	
+	
+	public Facade() {
 		
 	}
 
 	public static Facade getFacade() {
 		if (facade == null) {
-			facade = new Facade();
+			DI di=new DI();
+			try {
+				facade = (IFacade) di.inject(IFacade.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
 		}
-		return facade;
+		return (Facade) facade;
 	}
 
 	public void init(DataBase dataBase) {
