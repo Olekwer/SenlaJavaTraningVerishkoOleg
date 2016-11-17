@@ -18,6 +18,7 @@ import com.example.oleg.model.Guest;
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
 import com.example.oleg.prop.PropHolder;
+import com.example.oleg.prop.PropInit;
 
 public class RoomsService {
 	private static final String CONFIG_CONFIG_PROPERTIES = "config/config.properties";
@@ -27,12 +28,12 @@ public class RoomsService {
 	private DataBase dateBase;
 	private Logger log = Logger.getLogger(RoomsService.class.getName());
 
-	private PropHolder propHolder;
+	private PropInit propInit;
 
 	public RoomsService(DataBase dateBase) {
 		this.dateBase = dateBase;
-		this.propHolder = new PropHolder(CONFIG_CONFIG_PROPERTIES);
-		this.propHolder.getPropInit();
+		this.propInit = new PropInit();
+		this.propInit.propInit(CONFIG_CONFIG_PROPERTIES);;
 	}
 
 	public void setRoomsList(List<Room> roomsList) {
@@ -122,7 +123,7 @@ public class RoomsService {
 	}
 
 	public void repairsRoom(int numberRoom) {
-		String str = propHolder.getPropInit().geProperties("statusOn");
+		String str =  propInit.getProperties(CONFIG_CONFIG_PROPERTIES,"statusOn");
 		Boolean boolean1 = Boolean.parseBoolean(str);
 		if (boolean1) {
 
@@ -141,7 +142,7 @@ public class RoomsService {
 	}
 
 	public void maintainedRoom(int numberRoom) {
-		String str = propHolder.getPropInit().geProperties("statusOn");
+		String str =  propInit.getProperties(CONFIG_CONFIG_PROPERTIES,"statusOn");
 		Boolean boolean1 = Boolean.parseBoolean(str);
 		if (boolean1) {
 			try {
@@ -196,7 +197,8 @@ public class RoomsService {
 	}
 
 	public List<Guest> historyGuest(Room room, int amountGuest) {
-		amountGuest = Integer.parseInt(propHolder.getPropInit().geProperties(
+
+		amountGuest = Integer.parseInt(propInit.getProperties(CONFIG_CONFIG_PROPERTIES,
 				"amountHistory"));
 		List<Guest> list = new ArrayList<Guest>();
 		int number = room.getNumber();
