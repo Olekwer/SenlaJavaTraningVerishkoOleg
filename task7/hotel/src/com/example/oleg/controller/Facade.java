@@ -8,6 +8,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.example.oleg.base.DataBase;
+import com.example.oleg.controller.iservice.IGuestService;
+import com.example.oleg.controller.iservice.IOptionService;
+import com.example.oleg.controller.iservice.IOrderService;
+import com.example.oleg.controller.iservice.IRoomSrvice;
 import com.example.oleg.di.DI;
 import com.example.oleg.di.inject;
 
@@ -15,12 +19,12 @@ import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
 import com.example.oleg.model.Room;
 
-public class Facade implements IFacade{
-	
+public class Facade implements IFacade {
+
 	@inject
 	private static IFacade facade;
 	@inject
-	private GuestsService serviceGuests;
+	private IGuestService serviceGuests;
 	@inject
 	private RoomsService serviceRooms;
 	@inject
@@ -29,29 +33,42 @@ public class Facade implements IFacade{
 	private OrderService serviceOrder;
 	private static Logger log = Logger.getLogger(RoomsService.class.getName());
 
-	
-	
 	public Facade() {
-		
+
 	}
 
 	public static Facade getFacade() {
 		if (facade == null) {
-			DI di=new DI();
+			// DI di=new DI();
 			try {
-				facade = (IFacade) di.inject(IFacade.class);
+				facade = (IFacade) DI.inject(IFacade.class);
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 		return (Facade) facade;
 	}
 
 	public void init(DataBase dataBase) {
-		this.serviceGuests = new GuestsService(dataBase);
-		this.serviceRooms = new RoomsService(dataBase);
-		this.serviceOptions = new OptionsService(dataBase);
-		this.setServiceOrder(new OrderService(dataBase));
+		// System.out.println("as");
+		try {
+			this.serviceGuests = (IGuestService) DI.inject(IGuestService.class);
+			System.out.println(this.serviceGuests.getClass());
+			this.serviceGuests.setDateBase(dataBase);
+			this.serviceRooms = (RoomsService) DI.inject(IRoomSrvice.class);
+			this.serviceRooms.setDateBase(dataBase);
+			this.serviceOptions = (OptionsService) DI.inject(IOptionService.class);
+			this.serviceOptions.setDateBase(dataBase);
+			this.serviceOrder = (OrderService) DI.inject(IOrderService.class);
+			this.serviceOrder.setDateBase(dataBase);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public List<Guest> sortedByNameGuest() {
@@ -76,10 +93,12 @@ public class Facade implements IFacade{
 		this.serviceGuests.guestOut(idGuest);
 	}
 
-	/*public void saveGuest(String filePath) {
-		this.serviceGuests.saveGuest(filePath);
-
-	}*/
+	/*
+	 * public void saveGuest(String filePath) {
+	 * this.serviceGuests.saveGuest(filePath);
+	 * 
+	 * }
+	 */
 
 	public int amountGuest() {
 		return this.serviceGuests.amountGuest();
@@ -94,8 +113,8 @@ public class Facade implements IFacade{
 
 		return this.serviceRooms.allFreeRoom(date);
 	}
-	
-	public List<Guest> historyGuestRoom(Room room, int amountGuest){
+
+	public List<Guest> historyGuestRoom(Room room, int amountGuest) {
 		return this.serviceRooms.historyGuest(room, amountGuest);
 	}
 
@@ -149,7 +168,6 @@ public class Facade implements IFacade{
 		return this.serviceRooms.sortByCapacity();
 	}
 
-	
 	// Service option
 
 	public List<Option> sortByNameOption() {
@@ -172,13 +190,12 @@ public class Facade implements IFacade{
 
 	public void setPriceOption(int idOption, double price) {
 		this.serviceOptions.setPrice(idOption, price);
-		
+
 	}
-	
-	public void updatePriceRoom(Room room, double price){
+
+	public void updatePriceRoom(Room room, double price) {
 		this.serviceRooms.updatePriceRoom(room, price);
 	}
-	
 
 	public void saverOption(String path) {
 		try {
@@ -191,11 +208,12 @@ public class Facade implements IFacade{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void saverGuest(String path) {
 		try {
 
-			this.serviceGuests.saverGuest(path);;
+			this.serviceGuests.saverGuest(path);
+			;
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -203,6 +221,7 @@ public class Facade implements IFacade{
 			e.printStackTrace();
 		}
 	}
+
 	public void saverRoom(String path) {
 		try {
 
@@ -214,11 +233,12 @@ public class Facade implements IFacade{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void saverOrder(String path) {
 		try {
 
-			this.serviceOrder.saverOrder(path);;
+			this.serviceOrder.saverOrder(path);
+			;
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -234,7 +254,7 @@ public class Facade implements IFacade{
 	}
 
 	public GuestsService getServiceGuests() {
-		return serviceGuests;
+		return (GuestsService) serviceGuests;
 	}
 
 	public void setServiceGuests(GuestsService serviceGuests) {
@@ -264,17 +284,20 @@ public class Facade implements IFacade{
 	public void setServiceOrder(OrderService serviceOrder) {
 		this.serviceOrder = serviceOrder;
 	}
-	public Room cloneRoom(int numberRoom){
+
+	public Room cloneRoom(int numberRoom) {
 		return this.serviceRooms.roomClone(numberRoom);
 	}
-	public void importCsvRoom(String path){
+
+	public void importCsvRoom(String path) {
 		try {
 			this.serviceRooms.importCsv(path);
 		} catch (IOException e) {
 			log.info(e);
 		}
 	}
-	public void exportCsvRoom(String path){
+
+	public void exportCsvRoom(String path) {
 		this.serviceRooms.exportCSV(path);
 	}
 }

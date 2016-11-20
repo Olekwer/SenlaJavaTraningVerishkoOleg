@@ -10,13 +10,23 @@ import org.apache.log4j.Logger;
 
 import com.example.oleg.base.DataBase;
 import com.example.oleg.compare.guest.CompareGuestName;
+import com.example.oleg.controller.iservice.IGuestService;
 import com.example.oleg.model.Guest;
 
-public class GuestsService {
+public class GuestsService implements IGuestService {
 
 	private DataBase dateBase;
-	private Logger log= Logger.getLogger(GuestsService.class.getName());
+	private Logger log = Logger.getLogger(GuestsService.class.getName());
+
+	public GuestsService() {
+
+	}
+
 	public GuestsService(DataBase dateBase) {
+		this.dateBase = dateBase;
+	}
+
+	public void setDateBase(DataBase dateBase) {
 		this.dateBase = dateBase;
 	}
 
@@ -41,48 +51,42 @@ public class GuestsService {
 	}
 
 	public void putGuestRoom(String name, int numberRoom, Date dateChange, Date dateOut) {
-		try{
+		try {
 			int id = this.dateBase.getGuestsList().size() + 1;
 			Guest guest = new Guest(id, name, numberRoom, dateChange, dateOut);
 			this.dateBase.getGuestsList().add(guest);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			log.info(e);
 		}
-		
+
 	}
 
 	public void guestOut(int idGuest) {
-		try{
+		try {
 			this.dateBase.getGuestsList().remove(idGuest);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			log.info(e);
 
 		}
-		
-	}
-
-	/*public void saveGuest(String filePath) {
-		try{
-			FileSaver saveFile = new FileSaver(filePath);
-		saveFile.saveGuest(this.dateBase.getGuestsList());
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-		}
 
 	}
-*/
+
+	/*
+	 * public void saveGuest(String filePath) { try{ FileSaver saveFile = new
+	 * FileSaver(filePath); saveFile.saveGuest(this.dateBase.getGuestsList()); }
+	 * catch (Exception e) { // TODO: handle exception }
+	 * 
+	 * }
+	 */
 	public int amountGuest() {
 		return this.dateBase.getGuestsList().size();
 	}
-	
+
 	public void saverGuest(String path) throws FileNotFoundException, IOException {
 		FileSaver saveFile = new FileSaver(path);
 		saveFile.sever(this.dateBase.getGuestsList());
 	}
-	
+
 }
