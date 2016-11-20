@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.oleg.base.DataBase;
+import com.example.oleg.controller.iservice.IOrderService;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
 import com.example.oleg.model.Order;
 
-public class OrderService {
+public class OrderService implements IOrderService {
 
 
 	private DataBase dataBase;
@@ -18,7 +19,9 @@ public class OrderService {
 		this.dataBase=datBase;
 
 	}
-
+	public OrderService(){
+		
+	}
 	public List<Option> optionGuest(int idGuest) {
 		Guest guest = null;
 		int optionId = 0;
@@ -49,6 +52,11 @@ public class OrderService {
 	public void saverOrder(String path) throws FileNotFoundException, IOException {
 		FileSaver saveFile = new FileSaver(path);
 		saveFile.sever(this.dataBase.getOrderList());
+	}
+	@Override
+	public void setDateBase(DataBase dateBase) {
+		// TODO Auto-generated method stub
+		this.dataBase=dateBase;
 	}
 
 }

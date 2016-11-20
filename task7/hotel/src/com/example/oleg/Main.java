@@ -11,6 +11,7 @@ import com.example.oleg.base.DataBase;
 import com.example.oleg.controller.Facade;
 import com.example.oleg.controller.IFacade;
 import com.example.oleg.controller.RoomsService;
+import com.example.oleg.controller.iservice.IGuestService;
 import com.example.oleg.controller.iservice.IRoomSrvice;
 import com.example.oleg.di.DI;
 import com.example.oleg.model.Room;
@@ -27,7 +28,12 @@ public class Main {
 	 * @throws InstantiationException 
 	 */
 	public static void main(String[] args) throws ParseException, FileNotFoundException, IOException, InstantiationException, IllegalAccessException {
+		IFacade facadea=(IFacade) DI.inject(IFacade.class);
+		System.out.println("---"+facadea.getClass());
 		
+		IGuestService guestService=(IGuestService) DI.inject(IGuestService.class);
+		System.out.println("---"+guestService.getClass());
+
 		IRoomSrvice r=new RoomsService();
 		
 		DI di=new DI();

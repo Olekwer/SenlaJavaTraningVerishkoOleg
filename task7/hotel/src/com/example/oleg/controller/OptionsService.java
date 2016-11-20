@@ -10,16 +10,19 @@ import org.apache.log4j.Logger;
 
 import com.example.oleg.base.DataBase;
 import com.example.oleg.compare.option.CompareOptionsName;
+import com.example.oleg.controller.iservice.IOptionService;
 import com.example.oleg.model.Option;
 
-public class OptionsService {
+public class OptionsService implements IOptionService{
 	private DataBase dateBase;
 	private static Logger log= Logger.getLogger(OptionsService.class.getName());
 
 	public OptionsService(DataBase dateBase) {
 		this.dateBase = dateBase;
 	}
-
+	public OptionsService(){
+		
+	}
 	public List<Option> getOptionsList() {
 		return this.dateBase.getOptionsList();
 	}
@@ -74,6 +77,12 @@ public class OptionsService {
 	public void saverOption(String path) throws FileNotFoundException, IOException {
 		FileSaver saveFile = new FileSaver(path);
 		saveFile.sever(this.dateBase.getOptionsList());
+	}
+
+	@Override
+	public void setDateBase(DataBase dateBase) {
+		// TODO Auto-generated method stub
+		this.dateBase=dateBase;
 	}
 
 }

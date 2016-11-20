@@ -35,8 +35,13 @@ public class RoomsService implements IRoomSrvice{
 	public RoomsService(DataBase dateBase) {
 		this.dateBase = dateBase;
 		this.propInit = new PropInit();
-		this.propInit.propInit(CONFIG_CONFIG_PROPERTIES);;
+		this.propInit.propInit(CONFIG_CONFIG_PROPERTIES);
 	}
+	public void setDateBase(DataBase dateBase){
+		this.dateBase = dateBase;
+		this.propInit = new PropInit();
+		this.propInit.propInit(CONFIG_CONFIG_PROPERTIES);
+	};
 
 	public void setRoomsList(List<Room> roomsList) {
 		this.dateBase.setRoomsList(roomsList);

@@ -1,53 +1,46 @@
 package com.example.oleg;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.oleg.prop.PropInit;
 
 public class ValueGenerator {
-	private String configName;
-	private String propertyName;
-	private Class<?> type;
-	private PropInit propInit = new PropInit();
+	
+	private PropInit propInit;
 
-	public ValueGenerator(String configName, String propertyName, Class<?> type) {
-		this.configName = configName;
-		this.propertyName = propertyName;
-		this.type = type;
+	public ValueGenerator() {
+		
 		propInit = new PropInit();
-		propInit.propInit(configName);
+		
 	}
 
-	public Object getValue() {
+	public Object getValue(String configName, String propertyName, Class<?> type) {
 		Object value = null;
 		String propsValue = propInit.getProperties(configName, propertyName);
-		Class<?> et = type;
+		//Class<?> et = type;
 
-		if (this.type.equals(String.class)) {
+		if (type.equals(String.class)) {
 			value = new String();
 			value = propsValue;
 
-		} else if (this.type.equals(Integer.class) || this.type.equals(int.class)) {
+		} else if (type.equals(Integer.class) || type.equals(int.class)) {
 
 			try {
 				value = new Integer(propsValue);
 			} catch (Exception e) {
 
 			}
-		} else if (this.type.equals(Double.class) || this.type.equals(double.class)) {
+		} else if (type.equals(Double.class) || type.equals(double.class)) {
 			try {
 				value = new Double(propsValue);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		} else if (this.type.equals(Float.class) || this.type.equals(float.class)) {
+		} else if (type.equals(Float.class) || type.equals(float.class)) {
 			try {
 				value = new Float(propsValue);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		}else if (this.type.equals(Byte.class) || this.type.equals(byte.class)) {
+		}else if (type.equals(Byte.class) || type.equals(byte.class)) {
 			try {
 				value = new Byte(propsValue);
 			} catch (Exception e) {
