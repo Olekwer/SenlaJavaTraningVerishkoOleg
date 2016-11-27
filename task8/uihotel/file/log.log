@@ -1,0 +1,18 @@
+2016-11-27 18:42:25 INFO  Controller:51 - Exception: 
+java.lang.NullPointerException
+	at org.example.oleg.event.AllRooms.action(AllRooms.java:13)
+	at org.example.oleg.display.Display.draw(Display.java:18)
+	at org.example.oleg.controller.Controller.start(Controller.java:48)
+	at org.example.oleg.Main.main(Main.java:29)
+2016-11-27 18:44:23 INFO  Controller:51 - Exception: 
+java.lang.NullPointerException
+	at org.example.oleg.event.AllOption.action(AllOption.java:13)
+	at org.example.oleg.display.Display.draw(Display.java:18)
+	at org.example.oleg.controller.Controller.start(Controller.java:48)
+	at org.example.oleg.Main.main(Main.java:29)
+2016-11-27 18:45:20 INFO  Controller:51 - Exception: 
+java.lang.NullPointerException
+	at org.example.oleg.event.AllRooms.action(AllRooms.java:13)
+	at org.example.oleg.display.Display.draw(Display.java:18)
+	at org.example.oleg.controller.Controller.start(Controller.java:48)
+	at org.example.oleg.Main.main(Main.java:32)
