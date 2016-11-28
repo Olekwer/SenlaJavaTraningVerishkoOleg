@@ -20,16 +20,35 @@ public class DataBase {
 	public DataBase(String path1, String path2, String path3, String path4) {
 
 		try {
-			this.roomsList = new ListCreater().creteRoom(path1);
-			this.guestsList = new ListCreater().createGuest(path2);
-			this.optionsList = new ListCreater().createOption(path3);
-			this.orderList = new ListCreater().createOrder(path4);
+			String path11="room.txt";
+			String path21="guest.txt";
+			String path31="option.txt";
+			String path41="order.txt";
+			this.roomsList = new ListCreater().creteRoom(path11);
+			this.guestsList = new ListCreater().createGuest(path21);
+			this.optionsList = new ListCreater().createOption(path31);
+			this.orderList = new ListCreater().createOrder(path41);
 		} catch (Exception e) {
 			log.info(e);
 
 		}
 
 		// guestAddRoom();
+	}
+	public DataBase(){
+		try {
+			String path11="room.txt";
+			String path21="guest.txt";
+			String path31="option.txt";
+			String path41="order.txt";
+			this.roomsList = new ListCreater().creteRoom(path11);
+			this.guestsList = new ListCreater().createGuest(path21);
+			this.optionsList = new ListCreater().createOption(path31);
+			this.orderList = new ListCreater().createOrder(path41);
+		} catch (Exception e) {
+			log.info(e);
+
+		}
 	}
 
 	public List<Room> getRoomsList() {

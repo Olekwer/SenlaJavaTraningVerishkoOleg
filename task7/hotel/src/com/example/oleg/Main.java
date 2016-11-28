@@ -46,13 +46,9 @@ public class Main {
 		
 		//System.out.println(args[0]);
 	
-		DataBase dateBase = new DataBase("room.txt", "guest.txt", "option.txt", "order.txt");
 		IFacade facade = Facade.getFacade();
-		facade.init(dateBase);
-		facade.saverOption("option.txt");
-		facade.saverGuest("guest.txt");
-		facade.saverRoom("room.txt");
-		facade.saverOrder("order.txt");
+		facade.init();
+		
 		
 		for (int i = 0; i < facade.getServiceOptions().getOptionsList().size(); i++) {
 			System.out.println(facade.getServiceOptions().getOptionsList().get(i));

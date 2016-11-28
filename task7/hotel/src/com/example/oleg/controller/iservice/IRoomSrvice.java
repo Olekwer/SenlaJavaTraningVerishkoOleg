@@ -12,7 +12,7 @@ import com.example.oleg.model.Guest;
 import com.example.oleg.model.Room;
 
 public interface IRoomSrvice {
-	public void setDateBase(DataBase dateBase);
+	public void setDateBase(DataBase dateBase) throws InstantiationException, IllegalAccessException;
 
 	public void setRoomsList(List<Room> roomsList);
 

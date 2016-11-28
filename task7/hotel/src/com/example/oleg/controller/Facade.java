@@ -13,7 +13,6 @@ import com.example.oleg.controller.iservice.IOptionService;
 import com.example.oleg.controller.iservice.IOrderService;
 import com.example.oleg.controller.iservice.IRoomSrvice;
 import com.example.oleg.di.DI;
-import com.example.oleg.di.inject;
 
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
@@ -21,17 +20,16 @@ import com.example.oleg.model.Room;
 
 public class Facade implements IFacade {
 
-	@inject
 	private static IFacade facade;
-	@inject
+
 	private IGuestService serviceGuests;
-	@inject
+
 	private RoomsService serviceRooms;
-	@inject
+
 	private OptionsService serviceOptions;
-	@inject
+
 	private OrderService serviceOrder;
-	private static Logger log = Logger.getLogger(RoomsService.class.getName());
+	private static Logger log = Logger.getLogger(Facade.class.getName());
 
 	public Facade() {
 
@@ -42,6 +40,7 @@ public class Facade implements IFacade {
 			// DI di=new DI();
 			try {
 				facade = (IFacade) DI.inject(IFacade.class);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -49,11 +48,11 @@ public class Facade implements IFacade {
 		return (Facade) facade;
 	}
 
-	public void init(DataBase dataBase) {
+	public void init() {
 		// System.out.println("as");
 		try {
+			DataBase dataBase = new DataBase();
 			this.serviceGuests = (IGuestService) DI.inject(IGuestService.class);
-			System.out.println(this.serviceGuests.getClass());
 			this.serviceGuests.setDateBase(dataBase);
 			this.serviceRooms = (RoomsService) DI.inject(IRoomSrvice.class);
 			this.serviceRooms.setDateBase(dataBase);

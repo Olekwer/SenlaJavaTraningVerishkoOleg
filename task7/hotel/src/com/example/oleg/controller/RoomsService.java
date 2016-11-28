@@ -15,6 +15,7 @@ import com.example.oleg.compare.room.CompareRoomCapacity;
 import com.example.oleg.compare.room.CompareRoomPrice;
 import com.example.oleg.compare.room.CompareRoomStars;
 import com.example.oleg.controller.iservice.IRoomSrvice;
+import com.example.oleg.di.DI;
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Room;
 import com.example.oleg.model.StatusRoom;
@@ -32,16 +33,11 @@ public class RoomsService implements IRoomSrvice{
 	public RoomsService(){
 		
 	}
-	public RoomsService(DataBase dateBase) {
+
+	public void setDateBase(DataBase dateBase) throws InstantiationException, IllegalAccessException{
 		this.dateBase = dateBase;
-		this.propInit = new PropInit();
-		this.propInit.propInit(CONFIG_CONFIG_PROPERTIES);
+		this.propInit = (PropInit) DI.inject(PropInit.class);
 	}
-	public void setDateBase(DataBase dateBase){
-		this.dateBase = dateBase;
-		this.propInit = new PropInit();
-		this.propInit.propInit(CONFIG_CONFIG_PROPERTIES);
-	};
 
 	public void setRoomsList(List<Room> roomsList) {
 		this.dateBase.setRoomsList(roomsList);
