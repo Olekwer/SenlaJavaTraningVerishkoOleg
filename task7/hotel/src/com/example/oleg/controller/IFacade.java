@@ -14,7 +14,7 @@ import com.example.oleg.model.Option;
 import com.example.oleg.model.Room;
 
 public interface IFacade {
-	 void init(DataBase dataBase);
+	 void init();
 	 List<Guest> sortedByNameGuest();
 	 List<Guest> getGuestsList();
 	 List<Guest> sortedByDateOutGuest();
