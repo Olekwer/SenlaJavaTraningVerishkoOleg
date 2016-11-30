@@ -27,8 +27,8 @@ public class ServerMain {
 				 * создание отдельного потока для обмена данными с соединившимся
 				 * клиентом
 				 */
-				HttpServer server = new HttpServer(sock);
-				server.start();// запуск потока
+				SocketProcessor session = new SocketProcessor(sock);
+				session.start();// запуск потока
 			}
 		} catch (IOException e) {
 			System.err.println(e);

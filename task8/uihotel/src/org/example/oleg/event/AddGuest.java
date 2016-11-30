@@ -8,7 +8,8 @@ import java.util.List;
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
+
 
 
 public class AddGuest implements IEvent {
@@ -41,7 +42,7 @@ public class AddGuest implements IEvent {
 		list.add(numberRoom);
 		list.add(dateChange);
 		list.add(dateOut);
-		HttpClient.postHttp("addGuest", list);
+		Request.send(list);
 		//facade.getServiceGuests().putGuestRoom(name, numberRoom, dateChange, dateOut);
 	}
 

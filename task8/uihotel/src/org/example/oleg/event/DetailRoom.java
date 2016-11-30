@@ -6,7 +6,7 @@ import java.util.List;
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class DetailRoom implements IEvent {
 	private static final String PLEACE_ENTER_NUMBER_ROOM = "Pleace enter number Room";
@@ -21,7 +21,7 @@ public class DetailRoom implements IEvent {
 		try {
 			int number = input.numberInt();
 			list.add(number);
-			printer.print(HttpClient.postHttp("detailRoom",list));
+			printer.print((String)Request.send(list));
 			
 		} catch (Exception e) {
 			// TODO: handle exception
