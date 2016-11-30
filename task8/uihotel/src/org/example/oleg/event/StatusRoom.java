@@ -6,7 +6,8 @@ import java.util.List;
 
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
-import oleg.example.org.HttpClient;
+
+import com.example.api.Request;
 
 public class StatusRoom implements IEvent {
 	private static final String STATUS_R = "r";
@@ -26,9 +27,9 @@ public class StatusRoom implements IEvent {
 		String status = input.string();
 		list.add(numberRoom);
 		if (status.equals(STATUS_M)) {
-			HttpClient.postHttp("STATUS_M", list);
+			Request.send(list);
 		} else if (status.equals(STATUS_R)) {
-			HttpClient.postHttp("STATUS_R", list);
+			Request.send(list);
 		}
 
 	}

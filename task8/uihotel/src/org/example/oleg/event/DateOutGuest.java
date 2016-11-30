@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.example.oleg.reader.Printer;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class DateOutGuest implements IEvent{
 
@@ -12,7 +12,7 @@ public class DateOutGuest implements IEvent{
 		// TODO Auto-generated method stub
 		Printer printer=new Printer();
 		
-			printer.print(HttpClient.getRestHttp("sortedByDateOutGuest"));
+			printer.print((String)Request.send("sortedByDateOutGuest"));
 			
 		
 	}

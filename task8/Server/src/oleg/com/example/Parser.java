@@ -1,10 +1,14 @@
 package oleg.com.example;
 
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ListModel;
+
+import com.example.api.Response;
 import com.example.oleg.controller.Facade;
 import com.example.oleg.controller.IFacade;
 import com.example.oleg.model.Guest;
@@ -13,14 +17,46 @@ import com.example.oleg.model.Room;
 /*
  * команды для запросов
  */
-public class Interprator {
+public class Parser {
 	private IFacade facade;
-	public Interprator(){
+	public Parser(){
 		facade=Facade.getFacade();
 		facade.init();
 	}
+	
+	public Object invoke(Response response){
+		String header= response.getHeader();
+		@SuppressWarnings("unchecked")
+		List<Object>objects=(List<Object>) response.getObject();
+		IFacade facade=Facade.getFacade();
+		facade.init();
+		Object result=null;
+		
+		try {
+			Class<?>clazz=facade.getClass();
+			Class[] argTypes = new Class[] { Object[].class };
+			Object[] mainArgs = new Object[objects.size()];
+			for(int i=0; i<objects.size();i++){
+				mainArgs[i]=objects.get(i);
+			}
+			System.out.println(clazz.getDeclaredMethod(header));
+
+			Method method=clazz.getDeclaredMethod(header, argTypes);
+			result=method.invoke(null,(Object)mainArgs);
+			
+			
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public String allRoom(){
+		System.out.println("qwertyui");
 		StringBuilder builder=new StringBuilder();
 		List<Room> roomList	=facade.getRoomsList();
 		for(Room r: roomList){

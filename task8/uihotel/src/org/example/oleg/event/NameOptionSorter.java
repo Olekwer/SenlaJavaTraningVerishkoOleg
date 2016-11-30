@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.example.oleg.reader.Printer;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class NameOptionSorter implements IEvent {
 
@@ -13,7 +13,7 @@ public class NameOptionSorter implements IEvent {
 		// TODO Auto-generated method stub
 	//	Reader reader= new Reader();
 		Printer printer=new Printer();
-			printer.print(HttpClient.getRestHttp("nameOptionSorter"));
+			printer.print((String)Request.send("nameOptionSorter"));
 			
 		
 	}

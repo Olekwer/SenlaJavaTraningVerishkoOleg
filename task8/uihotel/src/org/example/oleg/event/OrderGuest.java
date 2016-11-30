@@ -7,7 +7,7 @@ import java.util.List;
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class OrderGuest implements IEvent {
 	private static final String PLECE_ENTER_ID_GUEST = "Plece enter id Guest";
@@ -21,7 +21,7 @@ public class OrderGuest implements IEvent {
 		int idGuest = input.numberInt();
 		list.add(idGuest);
 
-		printer.print(HttpClient.postHttp("orderGuest", list));
+		printer.print((String)Request.send(list));
 
 	}
 

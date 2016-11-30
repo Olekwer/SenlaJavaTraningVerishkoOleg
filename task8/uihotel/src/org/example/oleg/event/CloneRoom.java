@@ -6,7 +6,7 @@ import java.util.List;
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class CloneRoom implements IEvent {
 	private static final String ID_NUMBER_ENTER = "id ������ ������";
@@ -20,7 +20,7 @@ public class CloneRoom implements IEvent {
 		try {
 			int a = input.numberInt();
 			list.add(a);
-			HttpClient.postHttp("cloneRoom", list);
+			Request.send(list);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

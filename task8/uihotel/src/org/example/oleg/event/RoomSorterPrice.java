@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import org.example.oleg.reader.Printer;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class RoomSorterPrice implements IEvent {
 	public void action() throws IOException {
 		// TODO Auto-generated method stub
 		Printer printer=new Printer();
-			printer.print(HttpClient.getRestHttp("roomSorterPrice"));
+			printer.print((String)Request.send("roomSorterPrice"));
 			
 		
 	}

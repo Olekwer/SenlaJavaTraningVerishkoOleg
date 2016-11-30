@@ -10,45 +10,82 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.List;
 
-public class HttpServer extends Thread {
+public class SocketProcessor extends Thread {
 	private PrintStream os;
 	private BufferedReader is;
 	private InetAddress addr;
 	private Socket socket;
-	private Interprator interprator;
+	private Parser parser;
+	private ObjectInputStream inputStream=null;
+	private	ObjectOutputStream objectOutputStream=null;
 
-	public HttpServer(Socket s) throws IOException {
-		this.socket = s;
-		os = new PrintStream(s.getOutputStream());
-		is = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		addr = s.getInetAddress();
-		interprator = new Interprator();
+	public SocketProcessor(Socket s) throws IOException {
+		this.socket = s;	
 	}
 
 	public void run() {
+	
 
-		String str;
+		try{
+			 inputStream = new ObjectInputStream(socket.getInputStream());
+			 objectOutputStream= new ObjectOutputStream(socket.getOutputStream());
+			
+			while(true){			   
+				Object n=inputStream.readObject();
+				
+					if(n!=null){
+						String res=get(n);
+						System.out.println(res);
+						objectOutputStream.writeObject(res);
+						objectOutputStream.flush();
+					}
+					
+				
+				
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("error");
+		}finally{
+			try {
+			//	is.close();
+			//	os.close();
+				objectOutputStream.close();
+				inputStream.close();
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+
+		/*String str;
 
 		List<Object> obE = null;
 		String stf = null;
 		Object o = null;
 		ObjectInputStream io=null;
+		
 		try {
 			//ObjectOutputStream ob = new ObjectOutputStream(socket.getOutputStream());
+			
 			io = new ObjectInputStream(socket.getInputStream());
-			o = io.readObject();
-			/*
-			 * определяем тип запроса. Можно определить и по названию. Определяю по типу. List - post. String - get
-			 */
-			if (o instanceof List) {
-				obE = (List<Object>) o;
-				post(obE);
-			} else if (o instanceof String) {
-				stf = (String) o;
-				get(stf);
+			while (true) {
+				
+				o = io.readObject();
+				if (o instanceof List) {
+					obE = (List<Object>) o;
+					post(obE);
+				} else if (o instanceof String) {
+					stf = (String) o;
+					get(stf);
+				}
+				// System.out.println("---"+obE.get(0));
+				
 			}
-			// System.out.println("---"+obE.get(0));
-			io.close();
+		
 
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -60,32 +97,34 @@ public class HttpServer extends Thread {
 				io.close();
 			} catch (IOException e) {
 			}
-		}
+		}*/
 	}
 	/*
 	 * get запрос
 	 */
-	public void get(String query) {
+	public String get(Object query) {
+		String res = null;
+		System.out.println("allRooms".equals(query));
 		try {
-			String res = null;
+			
 			if ("allRooms".equals(query)) {
-				res = interprator.allRoom();
+				res = parser.allRoom();
 			} else if ("allGuest".equals(query)) {
-				res = interprator.allGuest();
+				res = parser.allGuest();
 			} else if ("allOption".equals(query)) {
-				res = interprator.allOption();
+				res = parser.allOption();
 			} else if("allFreeRoom".equals(query)){
-				res=interprator.allFreeRoom();
+				res=parser.allFreeRoom();
 			} else if("capacityRoomSorter".equals(query)){
-				res=interprator.capacityRoomSorter();
+				res=parser.capacityRoomSorter();
 			}
-			os.println(res);
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			disconnect();
+		//	disconnect();
 		}
-
+		return res;
 	}
 	
 	/*
@@ -97,16 +136,18 @@ public class HttpServer extends Thread {
 		try {
 			String query = (String) param.get(0);
 			if ("addGuest".equals(query)) {
-				interprator.addGuest(param);
+				parser.addGuest(param);
 			}else if("detailRoom".equals(query)){
 				System.out.println(param.get(1));
-				res=interprator.detailRoom(param);
+				res=parser.detailRoom(param);
 				os.println(res);
+				os.flush();
 			}else if("cloneRoom".equals(query)){
-				interprator.cloneRoom(param);				
+				parser.cloneRoom(param);				
 			} else if("orderGuest".equals(query)){
-				res=interprator.orderGuest(param);
+				res=parser.orderGuest(param);
 				os.println(res);
+				os.flush();
 			}
 
 		} catch (Exception e) {
@@ -123,7 +164,7 @@ public class HttpServer extends Thread {
 			System.out.println(addr.getHostName() + " disconnected");
 			os.close();
 			is.close();
-			socket.close();
+			//socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

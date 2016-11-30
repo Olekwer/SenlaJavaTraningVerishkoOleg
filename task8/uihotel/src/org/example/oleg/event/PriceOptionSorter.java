@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.example.oleg.reader.Printer;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
 
 public class PriceOptionSorter implements IEvent {
 
@@ -13,7 +13,7 @@ public class PriceOptionSorter implements IEvent {
 		// Reader reader= new Reader();
 		Printer printer = new Printer();
 
-		printer.print(HttpClient.getRestHttp("priceOptionSorter"));
+		printer.print((String)Request.send("priceOptionSorter"));
 
 	}
 

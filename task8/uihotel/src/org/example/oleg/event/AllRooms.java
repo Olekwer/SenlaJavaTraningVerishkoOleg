@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import org.example.oleg.reader.Printer;
 
-import oleg.example.org.HttpClient;
+import com.example.api.Request;
+
 
 
 public class AllRooms implements IEvent {
@@ -15,7 +16,7 @@ public class AllRooms implements IEvent {
 			printer.print(facade.getRoomsList().get(i).toString());
 			
 		}*/
-		String s=HttpClient.getRestHttp("allRooms");
+		String s=(String) Request.send("allRooms");
 		printer.print(s);
 		
 	}
