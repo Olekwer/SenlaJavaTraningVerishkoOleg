@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.example.oleg.headersoket.HeaderSoket;
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
 
 import com.example.api.Request;
+import com.example.api.SendRequest;
 
 
 
@@ -42,7 +44,8 @@ public class AddGuest implements IEvent {
 		list.add(numberRoom);
 		list.add(dateChange);
 		list.add(dateOut);
-		Request.send(list);
+		Request request=new Request(list);
+		SendRequest.send(request, HeaderSoket.getSocket());
 		//facade.getServiceGuests().putGuestRoom(name, numberRoom, dateChange, dateOut);
 	}
 

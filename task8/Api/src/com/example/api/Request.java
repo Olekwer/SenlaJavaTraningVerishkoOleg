@@ -1,35 +1,26 @@
 package com.example.api;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
+import java.io.Serializable;
+import java.util.List;
 
-public class Request {
-	private static Socket socket;
-	public Request(Socket socket) {
-		// TODO Auto-generated constructor stub
-		Request.socket=socket;
+public class Request implements Serializable {
+	private String header;
+	private Object object;
+	public Request(List<Object> e){
+		setHeader((String) e.get(0));
+		e.remove(0);
+		setObject(e);
 	}
-	public static String send(Object header){
-		String response=null;
-		try {
-			ObjectOutputStream objectOutputStream=new ObjectOutputStream(socket.getOutputStream());
-			ObjectInputStream inputStream=new ObjectInputStream(socket.getInputStream());
-			
-			objectOutputStream.writeObject(header);
-			objectOutputStream.flush();
-			response=(String) inputStream.readObject();
-		
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		return response;
-		
+	public String getHeader() {
+		return header;
+	}
+	public void setHeader(String header) {
+		this.header = header;
+	}
+	public Object getObject() {
+		return object;
+	}
+	public void setObject(Object object) {
+		this.object = object;
 	}
 }

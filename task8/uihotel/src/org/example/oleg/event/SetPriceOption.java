@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.oleg.headersoket.HeaderSoket;
 import org.example.oleg.reader.Printer;
 import org.example.oleg.writer.Input;
 
 import com.example.api.Request;
+import com.example.api.SendRequest;
 
 public class SetPriceOption implements IEvent {
 	private static final String PLEACE_ENTER_NEW_PRICE_OPTION = "Pleace enter new price option";
@@ -26,9 +28,12 @@ public class SetPriceOption implements IEvent {
 
 		
 		double price = input.numberDouble();
+		list.add("setPriceRoom");
 		list.add(idOption);
 		list.add(price);
-		Request.send(list);
+
+		Request request=new Request(list);
+		String answer= (String) SendRequest.send(request, HeaderSoket.getSocket());
 	}
 
 }
