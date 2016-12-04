@@ -47,7 +47,7 @@ public class Controller {
 			} catch (Exception e) {
 				// TODO: handle exception
 				log.info("Exception: ", e);
-				System.out.println("нет такой команды");
+				e.printStackTrace();
 				continue;
 			}
 

@@ -21,7 +21,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		Socket socket=new Socket(InetAddress.getLocalHost(), 8071);
 		@SuppressWarnings("unused")
-		Request request=new Request(socket);
+	//	Request request=new Request(socket);
 		Builder builder = new Builder();
 		Controller controller = new Controller(builder);
 		controller.start();

@@ -13,7 +13,6 @@ import com.example.oleg.controller.iservice.IOptionService;
 import com.example.oleg.controller.iservice.IOrderService;
 import com.example.oleg.controller.iservice.IRoomSrvice;
 import com.example.oleg.di.DI;
-import com.example.oleg.di.inject;
 
 import com.example.oleg.model.Guest;
 import com.example.oleg.model.Option;
@@ -21,17 +20,16 @@ import com.example.oleg.model.Room;
 
 public class Facade implements IFacade {
 
-	@inject
 	private static IFacade facade;
-	@inject
+
 	private IGuestService serviceGuests;
-	@inject
+
 	private RoomsService serviceRooms;
-	@inject
+
 	private OptionsService serviceOptions;
-	@inject
+
 	private OrderService serviceOrder;
-	private static Logger log = Logger.getLogger(RoomsService.class.getName());
+	private static Logger log = Logger.getLogger(Facade.class.getName());
 
 	public Facade() {
 
@@ -42,7 +40,7 @@ public class Facade implements IFacade {
 			// DI di=new DI();
 			try {
 				facade = (IFacade) DI.inject(IFacade.class);
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -53,7 +51,7 @@ public class Facade implements IFacade {
 	public void init() {
 		// System.out.println("as");
 		try {
-			DataBase dataBase=new DataBase();
+			DataBase dataBase = new DataBase();
 			this.serviceGuests = (IGuestService) DI.inject(IGuestService.class);
 			this.serviceGuests.setDateBase(dataBase);
 			this.serviceRooms = (RoomsService) DI.inject(IRoomSrvice.class);
@@ -86,11 +84,11 @@ public class Facade implements IFacade {
 		return this.serviceGuests.sortedByDateOut();
 	}
 
-	public void putGuestRoom(String name, int numberRoom, Date dateChange, Date dateOut) {
+	public void putGuestRoom(String name, Integer numberRoom, Date dateChange, Date dateOut) {
 		this.serviceGuests.putGuestRoom(name, numberRoom, dateChange, dateOut);
 	}
 
-	public void guestOut(int idGuest) {
+	public void guestOut(Integer idGuest) {
 		this.serviceGuests.guestOut(idGuest);
 	}
 
@@ -115,39 +113,39 @@ public class Facade implements IFacade {
 		return this.serviceRooms.allFreeRoom(date);
 	}
 
-	public List<Guest> historyGuestRoom(Room room, int amountGuest) {
+	public List<Guest> historyGuestRoom(Room room, Integer amountGuest) {
 		return this.serviceRooms.historyGuest(room, amountGuest);
 	}
 
-	public Guest[] threeLostGuestRoom(int numderRoom) {
+	public Guest[] threeLostGuestRoom(Integer numderRoom) {
 
 		return this.serviceRooms.threeLostGuest(numderRoom);
 	}
 
-	public Room detailRoom(int numberRoom) {
+	public Room detailRoom(Integer numberRoom) {
 
 		return this.serviceRooms.detailRoom(numberRoom);
 	}
 
-	public void repairsRoom(int numberRoom) {
+	public void repairsRoom(Integer numberRoom) {
 		this.serviceRooms.repairsRoom(numberRoom);
 	}
 
-	public void maintainedRoom(int numberRoom) {
+	public void maintainedRoom(Integer numberRoom) {
 		this.serviceRooms.maintainedRoom(numberRoom);
 	}
 
-	public String priceNumber(int numberRoom) {
+	public String priceNumber(Integer numberRoom) {
 
 		return this.serviceRooms.priceNumber(numberRoom);
 	}
 
-	public double paymentGuestRoom(int idGuest) {
+	public double paymentGuestRoom(Integer idGuest) {
 
 		return this.serviceRooms.paymentGuest(idGuest);
 	}
 
-	public void setPriceRoom(int numberRoom, double price) {
+	public void setPriceRoom(Integer numberRoom, Double price) {
 		this.serviceRooms.setPrice(numberRoom, price);
 	}
 
@@ -185,16 +183,16 @@ public class Facade implements IFacade {
 		return this.serviceOptions.sortByPrice();
 	}
 
-	public void addOption(String name, double price) {
+	public void addOption(String name, Double price) {
 		this.serviceOptions.addOption(name, price);
 	}
 
-	public void setPriceOption(int idOption, double price) {
+	public void setPriceOption(Integer idOption, Double price) {
 		this.serviceOptions.setPrice(idOption, price);
 
 	}
 
-	public void updatePriceRoom(Room room, double price) {
+	public void updatePriceRoom(Room room, Double price) {
 		this.serviceRooms.updatePriceRoom(room, price);
 	}
 
@@ -250,7 +248,7 @@ public class Facade implements IFacade {
 
 	// Order Service
 
-	public List<Option> optionGuestOrder(int idGuest) {
+	public List<Option> optionGuestOrder(Integer idGuest) {
 		return this.serviceOrder.optionGuest(idGuest);
 	}
 
@@ -286,7 +284,7 @@ public class Facade implements IFacade {
 		this.serviceOrder = serviceOrder;
 	}
 
-	public Room cloneRoom(int numberRoom) {
+	public Room cloneRoom(Integer numberRoom) {
 		return this.serviceRooms.roomClone(numberRoom);
 	}
 

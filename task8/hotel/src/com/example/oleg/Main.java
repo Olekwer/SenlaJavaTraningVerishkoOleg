@@ -65,7 +65,7 @@ public class Main {
 		for (int i = 0; i < facade.getServiceOrder().optionGuest(1).size(); i++) {
 			System.out.println(facade.getServiceOrder().optionGuest(1).get(i));
 		}
-		System.out.println("-----------------------------------------------------");
+		System.out.println("-----------------------------------------------------"+facade.detailRoom(2));
 	//	Room r=facade.cloneRoom(1);
 		
 	//	System.out.println(r);
