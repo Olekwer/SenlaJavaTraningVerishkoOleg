@@ -85,11 +85,17 @@ public class Facade implements IFacade {
 	}
 
 	public void putGuestRoom(String name, Integer numberRoom, Date dateChange, Date dateOut) {
-		this.serviceGuests.putGuestRoom(name, numberRoom, dateChange, dateOut);
+		synchronized (serviceGuests) {
+			this.serviceGuests.putGuestRoom(name, numberRoom, dateChange, dateOut);
+
+		}
 	}
 
 	public void guestOut(Integer idGuest) {
-		this.serviceGuests.guestOut(idGuest);
+		synchronized (serviceGuests) {
+			this.serviceGuests.guestOut(idGuest);
+
+		}
 	}
 
 	/*
@@ -128,11 +134,17 @@ public class Facade implements IFacade {
 	}
 
 	public void repairsRoom(Integer numberRoom) {
-		this.serviceRooms.repairsRoom(numberRoom);
+		synchronized (serviceRooms) {
+			this.serviceRooms.repairsRoom(numberRoom);
+
+		}
 	}
 
 	public void maintainedRoom(Integer numberRoom) {
-		this.serviceRooms.maintainedRoom(numberRoom);
+		synchronized (serviceRooms) {
+			this.serviceRooms.maintainedRoom(numberRoom);
+
+		}
 	}
 
 	public String priceNumber(Integer numberRoom) {
@@ -146,7 +158,11 @@ public class Facade implements IFacade {
 	}
 
 	public void setPriceRoom(Integer numberRoom, Double price) {
-		this.serviceRooms.setPrice(numberRoom, price);
+		synchronized (serviceRooms) {
+			this.serviceRooms.setPrice(numberRoom, price);
+
+		}
+
 	}
 
 	public int amountFreeRoom() {
@@ -184,66 +200,87 @@ public class Facade implements IFacade {
 	}
 
 	public void addOption(String name, Double price) {
-		this.serviceOptions.addOption(name, price);
+		synchronized (serviceOptions) {
+			this.serviceOptions.addOption(name, price);
+
+		}
 	}
 
 	public void setPriceOption(Integer idOption, Double price) {
-		this.serviceOptions.setPrice(idOption, price);
+		synchronized (serviceOptions) {
+			this.serviceOptions.setPrice(idOption, price);
+
+		}
 
 	}
 
 	public void updatePriceRoom(Room room, Double price) {
-		this.serviceRooms.updatePriceRoom(room, price);
+		synchronized (serviceRooms) {
+			this.serviceRooms.updatePriceRoom(room, price);
+
+		}
 	}
 
 	public void saverOption(String path) {
-		try {
+		synchronized (serviceOptions) {
+			try {
 
-			this.serviceOptions.saverOption(path);
+				this.serviceOptions.saverOption(path);
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void saverGuest(String path) {
-		try {
 
-			this.serviceGuests.saverGuest(path);
-			;
+		synchronized (serviceGuests) {
+			try {
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+				this.serviceGuests.saverGuest(path);
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
 	}
 
 	public void saverRoom(String path) {
-		try {
 
-			this.serviceRooms.saverRoom(path);
+		synchronized (serviceRooms) {
+			try {
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+				this.serviceRooms.saverRoom(path);
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
 	}
 
 	public void saverOrder(String path) {
-		try {
+		synchronized (serviceOrder) {
+			try {
 
-			this.serviceOrder.saverOrder(path);
-			;
+				this.serviceOrder.saverOrder(path);
+				;
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
 	}
 
 	// Order Service
@@ -285,18 +322,27 @@ public class Facade implements IFacade {
 	}
 
 	public Room cloneRoom(Integer numberRoom) {
-		return this.serviceRooms.roomClone(numberRoom);
-	}
+		synchronized (serviceRooms) {
+			return this.serviceRooms.roomClone(numberRoom);
 
-	public void importCsvRoom(String path) {
-		try {
-			this.serviceRooms.importCsv(path);
-		} catch (IOException e) {
-			log.info(e);
 		}
 	}
 
+	public void importCsvRoom(String path) {
+		synchronized (serviceRooms) {
+			try {
+				this.serviceRooms.importCsv(path);
+			} catch (IOException e) {
+				log.info(e);
+			}
+		}
+
+	}
+
 	public void exportCsvRoom(String path) {
-		this.serviceRooms.exportCSV(path);
+		synchronized (serviceRooms) {
+			this.serviceRooms.exportCSV(path);
+
+		}
 	}
 }
